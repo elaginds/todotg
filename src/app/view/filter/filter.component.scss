@@ -1,0 +1,14 @@
+.filter-wrapper {
+  height: 30px;
+  width: 140px;
+  margin: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+
+  .filter-text-remove-icon {
+    margin-left: 5px;
+    font-size: 26px;
+    line-height: 30px;
+    color: darkslateblue;
+  }
+}

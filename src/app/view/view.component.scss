@@ -1,0 +1,78 @@
+.todo-container {
+  .sort-filter-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    .sort-wrapper {
+
+    }
+
+    .filter-wrapper {
+
+    }
+  }
+
+  .todo-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    text-align: right;
+
+    .todo-index {
+      width: 25px;
+      padding-right: 5px;
+    }
+
+    .todo-priority {
+      padding-right: 5px;
+
+      &.priority-full {
+        color: darkred;
+      }
+
+      &.priority-half {
+        color: darkblue;
+      }
+
+      &.priority-empty {
+        color: darkgreen;
+      }
+    }
+
+    .todo-select {
+
+    }
+
+    .todo-text-input {
+
+    }
+
+    .todo-text-span {
+      margin-left: 10px;
+
+      &.priority-full {
+        font-weight: bold;
+      }
+      &.priority-half {
+
+      }
+      &.priority-empty {
+        font-style: italic;
+      }
+    }
+
+    .todo-icon {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+
+      &.todo-icon-edit {
+        color: darkolivegreen;
+      }
+      &.todo-icon-remove {
+        color: darkred;
+      }
+      &.todo-icon-restore {
+        color: mediumslateblue;
+      }
+    }
+  }
+}

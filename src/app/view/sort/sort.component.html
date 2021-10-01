@@ -1,0 +1,7 @@
+<select class="sort-select" (change)="onSelectChange($event.target)">
+  <option *ngFor="let sort of selectSort"
+          value="{{sort.value}}"
+          [selected]="sort.value === defaultSort">
+    {{sort.name}}
+  </option>
+</select>

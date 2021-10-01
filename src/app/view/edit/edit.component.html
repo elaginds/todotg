@@ -1,0 +1,49 @@
+
+<!-- ДОБАВИТЬ ЗАДАЧУ -->
+<div class="todo-add-wrapper">
+
+  <fa-icon
+    class="todo-priority priority-full"
+    [ngClass]="{'priority-active': newToDo.priority === 1}"
+    (click)="newToDo.priority = 1"
+    [icon]="faIcons.faBatteryFull">
+  </fa-icon>
+  <fa-icon
+    class="todo-priority priority-half"
+    [ngClass]="{'priority-active': newToDo.priority === 2}"
+    (click)="newToDo.priority = 2"
+    [icon]="faIcons.faBatteryHalf">
+  </fa-icon>
+  <fa-icon
+    class="todo-priority priority-empty"
+    [ngClass]="{'priority-active': newToDo.priority === 3}"
+    (click)="newToDo.priority = 3"
+    [icon]="faIcons.faBatteryEmpty">
+  </fa-icon>
+
+  <input type="text" [(ngModel)]="newToDo.text">
+
+  <div class="todo-icon-add-wrapper">
+    <fa-icon class="todo-icon-add" [icon]="faIcons.faPlusSquare" (click)="addToDo()"></fa-icon>
+  </div>
+
+  <div class="todo-icon-show-wrapper" *ngIf="!showOptions">
+    <fa-icon class="todo-icon-show" [icon]="faIcons.faChevronCircleDown" (click)="showOptions = true"></fa-icon>
+  </div>
+
+  <div class="todo-icon-show-wrapper" *ngIf="showOptions">
+    <fa-icon class="todo-icon-show" [icon]="faIcons.faChevronCircleUp" (click)="showOptions = false"></fa-icon>
+  </div>
+
+</div>
+
+<!--<div class="note-wrapper" *ngIf="showOptions">-->
+<div class="note-wrapper" *ngIf="showOptions">
+  Описание
+  <textarea [(ngModel)]="newToDo.note"></textarea>
+</div>
+
+<div class="tags-wrapper" *ngIf="showOptions">
+  Тэги
+  <textarea></textarea>
+</div>

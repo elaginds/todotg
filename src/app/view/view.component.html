@@ -1,0 +1,54 @@
+<div class="todo-container">
+
+  <!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
+  <div class="sort-filter-wrapper">
+    <div class="sort-wrapper">
+      <app-sort [todoList]="todoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>
+    </div>
+    <div class="filter-wrapper">
+      <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>
+    </div>
+  </div>
+
+  <!-- ДОБАВЛЕНИЕ ЗАДАЧИ -->
+  <app-edit [todo]="newToDo" (emitTodo)="addToDo($event)"></app-edit>
+
+  <!-- ОСНОВНОЙ СПИСОК -->
+  <div class="todo-wrapper" *ngFor="let todo of sortedTodoList; let i = index">
+    <div class="todo-index">{{i + 1}}</div>
+
+    <fa-icon class="todo-priority priority-full" [icon]="faIcons.faBatteryFull" *ngIf="todo.priority === 1 && !todo.isEdit"></fa-icon>
+    <fa-icon class="todo-priority priority-half" [icon]="faIcons.faBatteryHalf" *ngIf="todo.priority === 2 && !todo.isEdit"></fa-icon>
+    <fa-icon class="todo-priority priority-empty" [icon]="faIcons.faBatteryEmpty" *ngIf="todo.priority === 3 && !todo.isEdit"></fa-icon>
+
+<!--    <button class="todo-button todo-button-edit" (click)="todo.isEdit = true">-->
+      <fa-icon class="todo-icon todo-icon-edit" [icon]="faIcons.faEdit" (click)="todo.isEdit = true"></fa-icon>
+<!--    </button>-->
+<!--    <button class="todo-button todo-button-remove" (click)="remove(todo)">-->
+      <fa-icon class="todo-icon todo-icon-restore" [icon]="faIcons.faTrashRestore" *ngIf="todo.removeDate" (click)="remove(todo)"></fa-icon>
+      <fa-icon class="todo-icon todo-icon-remove" [icon]="faIcons.faTrash" *ngIf="!todo.removeDate" (click)="remove(todo)"></fa-icon>
+<!--    </button>-->
+    <span class="todo-text-span"
+          [ngClass]="{'priority-full': todo.priority === 1, 'priority-half': todo.priority === 2, 'priority-empty': todo.priority === 3}"
+          *ngIf="!todo.isEdit">{{todo.text}}</span>
+
+    <!-- ДОБАВЛЕНИЕ ЗАДАЧИ -->
+    <app-edit *ngIf="todo.isEdit" [todo]="todo" (emitTodo)="edit($event)"></app-edit>
+
+    <!--<select class="todo-select" (change)="onSelectChange(i, $event.target)" *ngIf="todo.isEdit">
+      <option *ngFor="let priority of selectPriority"
+              value="{{priority.value}}"
+              [selected]="priority.value === todo.priority">
+        {{priority.name}}
+      </option>
+    </select>
+
+    <input class="todo-text-input" type="text" [(ngModel)]="todo.text" *ngIf="todo.isEdit" (blur)="edit(todo)">
+    <span class="todo-text-span"
+          [ngClass]="{'priority-full': todo.priority === 1, 'priority-half': todo.priority === 2, 'priority-empty': todo.priority === 3}"
+          *ngIf="!todo.isEdit">{{todo.text}}</span>-->
+
+  </div>
+
+
+</div>
