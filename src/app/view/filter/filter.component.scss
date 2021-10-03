@@ -11,4 +11,30 @@
     line-height: 30px;
     color: darkslateblue;
   }
+
+  .priority-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left: 10px;
+
+    .todo-priority {
+      padding: 0 5px;
+      font-size: 30px;
+      line-height: 30px;
+
+      &.priority-active {
+        &.priority-full {
+          color: darkred;
+        }
+
+        &.priority-half {
+          color: darkblue;
+        }
+
+        &.priority-empty {
+          color: darkgreen;
+        }
+      }
+    }
+  }
 }
