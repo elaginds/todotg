@@ -21,7 +21,7 @@ export class ViewComponent {
     faTrashRestore
   };
   public todoList: ToDo[] = null;
-  public sortedTodoList: ToDo[] = null;
+  public sortedTodoList: ToDo[];
   public newToDo = new ToDo();
   public selectPriority = [
     {
@@ -37,7 +37,9 @@ export class ViewComponent {
 
   @Input() set user(user: User | null) {
     if (user && user.userid) {
-      this.getTodos(user.userid);
+      setTimeout(() => {
+        this.getTodos(user.userid);
+      }, 1000);
     }
   }
 
@@ -49,11 +51,17 @@ export class ViewComponent {
   }
 
   public setFilteredTodos(todos: ToDo[]): void {
-    this.sortedTodoList = todos;
+    setTimeout(() => {
+      this.sortedTodoList = todos;
+    }, 13);
+
   }
 
   public addToDo(newToDo): void {
-    this.api.postToDo(new ToDo(newToDo)).subscribe(data => {
+    const todo = new ToDo(newToDo);
+    delete todo.isEdit;
+
+    this.api.postToDo(todo).subscribe(data => {
       this.todoList = data.map(item => {
         return new ToDo(item);
       });
@@ -77,6 +85,7 @@ export class ViewComponent {
 
   public edit(todo): void {
     todo.editDate = new Date();
+    delete todo.isEdit;
     this.api.editToDo(todo).subscribe(data => {
       this.todoList = data.map(item => {
         return new ToDo(item);
@@ -89,15 +98,15 @@ export class ViewComponent {
     });
   }
 
-  public onSelectChange(index: number, target: any): void {
-    this.todoList[index].priority = parseInt(target.value, 10);
-  }
-
   private getTodos(userid): void {
     this.api.getTodos(userid).subscribe(data => {
         this.todoList = data.map(item => {
           return new ToDo(item);
         });
+
+        /*this.sortedTodoList = data.map(item => {
+          return new ToDo(item);
+        });*/
       },
       error => {
         console.warn(error);

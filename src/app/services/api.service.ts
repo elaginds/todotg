@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ToDo} from '../models/ToDo';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class ApiService {
 
   public getUser(): Observable<any> {
     return this.http.get('/export/user', {params: {user: 'eds'}});
+  }
+
+  public getTags(): Observable<any> {
+    return this.http.get('/export/tags', {params: {user: 'eds'}});
   }
 
   public getTodos(userid): Observable<any> {

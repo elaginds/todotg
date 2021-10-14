@@ -22,6 +22,15 @@
       font-size: 30px;
       line-height: 30px;
 
+      &.todo-removed {
+        margin-left: 20px;
+        font-size: 25px;
+
+        &.priority-active {
+          color: royalblue;
+        }
+      }
+
       &.priority-active {
         &.priority-full {
           color: darkred;

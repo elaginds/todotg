@@ -3,7 +3,8 @@ import {
   faBatteryEmpty,
   faBatteryFull,
   faBatteryHalf,
-  faTimesCircle
+  faTimesCircle,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import {ToDo} from '../../models/ToDo';
 
@@ -13,6 +14,8 @@ import {ToDo} from '../../models/ToDo';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
+  public tags: string[] | null = null;
+  public showRemoved = false;
   public priority = {
     full: true,
     half: true,
@@ -22,7 +25,8 @@ export class FilterComponent {
     faTimesCircle,
     faBatteryFull,
     faBatteryHalf,
-    faBatteryEmpty
+    faBatteryEmpty,
+    faTrash
   };
 
   @Input() set todoList(todoList: ToDo[]) {
@@ -34,10 +38,14 @@ export class FilterComponent {
 
   @Output() emitFilteredTodos = new EventEmitter();
 
-  private static filterFn(todo: ToDo, text: string, priorityArr: number[]): boolean {
+  private static filterFn(todo: ToDo, text: string, priorityArr: number[], showRemoved: boolean, tags: string[] | null): boolean {
     let result = true;
 
     if (text && !todo.text) {
+      return false;
+    }
+
+    if (!showRemoved && todo.removeDate) {
       return false;
     }
 
@@ -47,6 +55,19 @@ export class FilterComponent {
 
     if (result && priorityArr && priorityArr.length) {
       result = priorityArr.indexOf(todo.priority) !== -1;
+    }
+
+    if (tags && tags.length) {
+      if (!todo.tags || !todo.tags.length) {
+        result = false;
+      } else {
+        tags.forEach(item => {
+          if (todo.tags.indexOf(item) === -1) {
+            result = false;
+          }
+        });
+
+      }
     }
 
     return result;
@@ -59,7 +80,7 @@ export class FilterComponent {
 
     if (this.todos && this.todos.filter) {
       this.emitFilteredTodos.emit(this.todos.filter(todo => {
-        return FilterComponent.filterFn(todo, this.text, this.createPriorityArr());
+        return FilterComponent.filterFn(todo, this.text, this.createPriorityArr(), this.showRemoved, this.tags);
       }));
     }
   }
@@ -68,6 +89,18 @@ export class FilterComponent {
     this.priority[type] = !this.priority[type];
 
     this.filter(this.text);
+  }
+
+  public changeRemoved(): void {
+    this.showRemoved = !this.showRemoved;
+
+    this.filter(this.text);
+  }
+
+  public setTags(tags: string[] | null): void {
+    this.tags = tags;
+
+    this.filter();
   }
 
   private createPriorityArr(): number[] {

@@ -10,6 +10,7 @@ import {User} from './models/User';
 export class AppComponent implements OnInit {
   title = 'todotg';
   user = null;
+  tags: string[] | null;
 
   constructor(private api: ApiService) {
   }
@@ -20,7 +21,6 @@ export class AppComponent implements OnInit {
 
   private getUser(): void {
     this.api.getUser().subscribe(user => {
-      console.log(user);
       this.user = new User(user);
     }, error => {
       console.warn(error);

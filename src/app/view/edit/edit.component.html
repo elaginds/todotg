@@ -43,7 +43,9 @@
   <textarea [(ngModel)]="newToDo.note"></textarea>
 </div>
 
-<div class="tags-wrapper" *ngIf="showOptions">
-  Тэги
-  <textarea></textarea>
+<div class="tags-wrapper">
+  <app-tags *ngIf="showOptions"
+            type="edit"
+            [todoTags]="newToDo.tags"
+            (emitTags)="setTags($event)"></app-tags>
 </div>

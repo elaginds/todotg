@@ -1,6 +1,7 @@
 .todo-add-wrapper {
   display: flex;
   flex-flow: row nowrap;
+  margin-left: 5px;
 
   .todo-priority {
     padding: 0 5px;
@@ -37,7 +38,7 @@
 }
 
 .note-wrapper {
-  width: 300px;
+  width: 500px;
   height: 100px;
   margin: 10px;
   textarea {
@@ -48,12 +49,5 @@
 }
 
 .tags-wrapper {
-  width: 300px;
-  height: 100px;
-  margin: 20px 10px 50px 10px;
-  textarea {
-    resize: none;
-    width: 100%;
-    height: 90px;
-  }
+  margin-top: 10px;
 }

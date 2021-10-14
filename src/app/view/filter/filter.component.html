@@ -2,6 +2,12 @@
   <input type="text" [(ngModel)]="text" (input)="filter($event.target.value)">
   <fa-icon class="filter-text-remove-icon" [icon]="faIcons.faTimesCircle" (click)="filter()"></fa-icon>
 
+  <div class="tags-wrapper">
+    <app-tags type="filter"
+              [todoTags]="tags"
+              (emitTags)="setTags($event)"></app-tags>
+  </div>
+
   <div class="priority-wrapper">
     <fa-icon
       class="todo-priority priority-full"
@@ -20,6 +26,14 @@
       [ngClass]="{'priority-active': priority.empty}"
       (click)="changePriority('empty')"
       [icon]="faIcons.faBatteryEmpty">
+    </fa-icon>
+
+
+    <fa-icon
+      class="todo-priority todo-removed"
+      [ngClass]="{'priority-active': showRemoved}"
+      (click)="changeRemoved()"
+      [icon]="faIcons.faTrash">
     </fa-icon>
   </div>
 </div>

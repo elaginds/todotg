@@ -57,6 +57,11 @@
       &.priority-empty {
         font-style: italic;
       }
+
+      &.removed {
+        text-decoration: line-through;
+        opacity: 0.7;
+      }
     }
 
     .todo-icon {

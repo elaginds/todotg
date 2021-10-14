@@ -1,0 +1,29 @@
+<div class="tags-wrapper mat-elevation-z8">
+
+  <mat-form-field class="chip-list">
+    <mat-chip-list #chipList aria-label="Country selection">
+      <mat-chip
+        *ngFor="let country of tags"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(country)">
+        {{country}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Введите тэги"
+        #tagInput
+        [formControl]="tagsCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let country of filteredTags | async" [value]="country">
+        {{country}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+</div>

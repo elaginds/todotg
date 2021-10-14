@@ -20,6 +20,13 @@ app.get('/export/user', (req, res) => {
   });
 });
 
+app.get('/export/tags', (req, res) => {
+  getTags().then(data => {
+    res.send(data);
+  });
+  // res.send(['India', 'USA', 'UK', 'Australia', 'Belgium', 'New Zealand', 'Canada', 'Philippines', 'Russia']);
+});
+
 app.get('/export/todo', (req, res) => {
   getTodo(req.query.userid).then(data => {
     res.send(data);
@@ -94,6 +101,35 @@ function editTodo(todo) {
   return new Promise((resolve, reject) => {
     base.editTodo(todo).then(data => {
       resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+}
+
+// tslint:disable-next-line:typedef
+function getTags() {
+  return new Promise((resolve, reject) => {
+    getTodo(1).then(data => {
+      // @ts-ignore
+      if (data && data.forEach) {
+        const result = [];
+
+        // @ts-ignore
+        data.forEach(item => {
+          if (item.tags && item.tags.forEach) {
+            item.tags.forEach(tag => {
+              if (result.indexOf(tag) === -1) {
+                result.push(tag);
+              }
+            });
+          }
+        });
+        console.log(result);
+        resolve(result);
+      } else {
+        resolve([]);
+      }
     }, err => {
       reject(err);
     });

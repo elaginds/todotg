@@ -31,4 +31,8 @@ export class EditComponent {
     }
   }
 
+  public setTags(tags: string[]): void {
+    this.newToDo.tags = tags;
+  }
+
 }
