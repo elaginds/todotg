@@ -19,6 +19,10 @@ export class ApiService {
     return this.http.get('/export/tags', {params: {user: 'eds'}});
   }
 
+  public addTag(text): Observable<any> {
+    return this.http.post('/export/tag/add', {text});
+  }
+
   public getTodos(userid): Observable<any> {
     return this.http.get('/export/todo', {params: {userid}});
   }

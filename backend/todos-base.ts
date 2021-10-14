@@ -1,8 +1,9 @@
 const io = require('./io.ts');
+const common = require('./common.ts');
 
 module.exports.getData = () => {
   return new Promise((resolve, reject) => {
-    io.readFile().then(data => {
+    io.readFile('todos').then(data => {
         resolve(data);
       },
       err => {
@@ -13,8 +14,8 @@ module.exports.getData = () => {
 
 module.exports.createTodo = (todo) => {
   return new Promise((resolve, reject) => {
-    io.readFile().then(data => {
-        todo.id = createId();
+    io.readFile('todos').then(data => {
+        todo.id = common.createId();
 
         if (data) {
           data.push(todo);
@@ -22,8 +23,8 @@ module.exports.createTodo = (todo) => {
           data = [todo];
         }
 
-        io.writeFile(data).then(() => {
-          io.readFile().then(todos => {
+        io.writeFile('todos', data).then(() => {
+          io.readFile('todos').then(todos => {
               resolve(todos);
             },
             err => {
@@ -42,11 +43,11 @@ module.exports.createTodo = (todo) => {
 module.exports.removeTodo = (id) => {
   console.log('REMOVE');
   return new Promise((resolve, reject) => {
-    io.readFile().then(data => {
-      data = removeFromArray(data, id);
+    io.readFile('todos').then(data => {
+      data = common.removeFromArray(data, id);
 
-      io.writeFile(data).then(() => {
-        io.readFile().then(todos => {
+      io.writeFile('todos', data).then(() => {
+        io.readFile('todos').then(todos => {
             resolve(todos);
           },
           err => {
@@ -61,11 +62,11 @@ module.exports.removeTodo = (id) => {
 
 module.exports.editTodo = (todo) => {
   return new Promise((resolve, reject) => {
-    io.readFile().then(data => {
-      data = changeInArray(data, todo);
+    io.readFile('todos').then(data => {
+      data = common.changeInArray(data, todo);
 
-      io.writeFile(data).then(() => {
-        io.readFile().then(todos => {
+      io.writeFile('todos', data).then(() => {
+        io.readFile('todos').then(todos => {
             resolve(todos);
           },
           err => {
@@ -76,32 +77,4 @@ module.exports.editTodo = (todo) => {
       });
     });
   });
-};
-
-const createId = () => {
-  return parseInt(Math.random().toString(10).substr(2, 9), 10);
-};
-
-const removeFromArray = (todos, id) => {
-  const result = [];
-  todos.forEach(item => {
-    if (parseInt(item.id, 10) !== parseInt(id, 10)) {
-      result.push(item);
-    }
-  });
-
-  return result;
-};
-
-const changeInArray = (todos, todo) => {
-  const result = [];
-  todos.forEach(item => {
-    if (parseInt(item.id, 10) === parseInt(todo.id, 10)) {
-      result.push(todo);
-    } else {
-      result.push(item);
-    }
-  });
-
-  return result;
 };

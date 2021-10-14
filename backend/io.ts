@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-exports.readFile = () => {
+exports.readFile = (filename) => {
   return new Promise((resolve, reject) => {
-    fs.readFile('./base.json', 'utf8',  (err, data) => {
+    fs.readFile(`./${filename}-base.json`, 'utf8',  (err, data) => {
       if (!data) {
         resolve('');
       }
@@ -18,9 +18,9 @@ exports.readFile = () => {
 
 };
 
-exports.writeFile = (todos) => {
+exports.writeFile = (filename, todos) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile('./base.json', JSON.stringify(todos),  (err) => {
+    fs.writeFile(`./${filename}-base.json`, JSON.stringify(todos),  (err) => {
       if (!err) {
         resolve(err);
       } else {

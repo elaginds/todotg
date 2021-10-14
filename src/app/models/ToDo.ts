@@ -1,9 +1,11 @@
+import {Tags} from './Tags';
+
 export class ToDo {
   id: number | null;
   userid: number | null;
   type: number | null;
   text: string | null;
-  tags: string[] | null;
+  tags: Tags[] | null;
   note: string | null;
   priority: number | null;
   done: boolean;

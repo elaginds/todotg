@@ -5,16 +5,14 @@
   box-shadow: none;
   margin: 10px;
 
-  .chip-list {
-    width: 100%;
-    height: 100%;
-
-    .chip-remove-button {
-      font-size: 19px;
-    }
-
-    .chip-input {
+  .tag-add-container {
+    .tag-add-input {
 
     }
+
+    .tag-add-button {
+       color: royalblue;
+       font-size: 24px;
+     }
   }
 }

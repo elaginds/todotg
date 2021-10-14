@@ -1,11 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import {ApiService} from '../../../services/api.service';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import {Tags} from '../../../models/Tags';
 
 @Component({
   selector: 'app-tags',
@@ -13,116 +10,55 @@ import {ApiService} from '../../../services/api.service';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
-  selectable = true;
-  removable = true;
+  faCheckSquare = faCheckSquare;
+  inputText = '';
   showInput = false;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   tagsCtrl = new FormControl();
-  filteredTags: Observable<any>;
-  tags: string[] = ['India'];
-  allTags: string[] = [];
-
-  @Input() set todoTags(tags: string[]) {
-    this.tags = tags || [];
-  }
+  tags: Tags[] = [];
+  _todoTags: Tags[] = [];
 
   @Input() set type(type: string) {
     this.showInput = type === 'edit';
   }
 
-  @Output() emitTags = new EventEmitter();
+  @Input() set todoTags(tags: Tags[]) {
+    console.log(tags);
 
-  @ViewChild('tagInput') tagInput: ElementRef;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+    this._todoTags = tags;
+  }
+
+  @Output() emitTags = new EventEmitter();
 
   ngOnInit(): void {
     this.getTags();
   }
 
   constructor(private api: ApiService) {
-    this.filteredTags = this.tagsCtrl.valueChanges.pipe(
-      startWith(null),
-      map(() => {
-        if (!this.showInput) {
-          this.trimTags();
-        }
-      }),
-      map(() => {
-        return this.createFilteredTags();
-        // return country ? this._filter(country) : this.allCountries.slice();
-      }));
+    this.tagsCtrl.valueChanges.subscribe(tags => {
+      this.emitTags.emit(tags);
+    });
   }
 
-  private trimTags(): void {
-    if (!this.tags || !this.tags.length) {
+  public addTag(): void {
+    if (!this.inputText) {
       return;
     }
 
-    const lastTag = this.tags[this.tags.length - 1];
+    this.api.addTag(this.inputText).subscribe(data => {
+      this.tags = data;
+    });
 
-    if (this.allTags.indexOf(lastTag) === -1) {
-      this.tags.pop();
-    }
+
+    this.inputText = '';
   }
 
   private getTags(): void {
     this.api.getTags().subscribe(tags => {
-      this.allTags = tags;
-      this.tagsCtrl.setValue(null);
+      this.tags = tags;
+      console.log('GETTAGS', this._todoTags);
+      this.tagsCtrl.setValue(this._todoTags);
     }, error => {
       console.warn(error);
-    });
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our country
-    if ((value || '').trim()) {
-      this.tags.push(value.trim());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.tagsCtrl.setValue(null);
-
-    this.emitTags.emit(this.tags);
-  }
-
-  remove(country: string): void {
-    const index = this.tags.indexOf(country);
-
-    if (index >= 0) {
-      this.tags.splice(index, 1);
-    }
-
-    this.emitTags.emit(this.tags);
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
-    this.tagInput.nativeElement.value = '';
-    this.tagsCtrl.setValue(null);
-    this.emitTags.emit(this.tags);
-  }
-
-  /*private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allCountries.filter(country => country.toLowerCase().indexOf(filterValue) === -1);
-  }*/
-
-  private createFilteredTags(): string[] {
-    return this.allTags.filter(country => {
-      if (this.tags && this.tags.indexOf) {
-        return this.tags.indexOf(country) === -1;
-      } else {
-        return true;
-      }
     });
   }
 

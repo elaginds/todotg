@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormField, MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TagsComponent} from './view/edit/tags/tags.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {TagsComponent} from './view/edit/tags/tags.component';
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
+    MatSelectModule,
     ReactiveFormsModule
   ],
   providers: [],

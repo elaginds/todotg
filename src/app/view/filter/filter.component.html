@@ -3,9 +3,7 @@
   <fa-icon class="filter-text-remove-icon" [icon]="faIcons.faTimesCircle" (click)="filter()"></fa-icon>
 
   <div class="tags-wrapper">
-    <app-tags type="filter"
-              [todoTags]="tags"
-              (emitTags)="setTags($event)"></app-tags>
+    <app-tags type="filter" (emitTags)="setTags($event)"></app-tags>
   </div>
 
   <div class="priority-wrapper">
