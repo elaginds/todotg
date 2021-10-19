@@ -5,7 +5,7 @@ export class ToDo {
   userid: number | null;
   type: number | null;
   text: string | null;
-  tags: Tags[] | null;
+  tags: number[] | null;
   note: string | null;
   priority: number | null;
   done: boolean;

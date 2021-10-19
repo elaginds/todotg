@@ -1,37 +1,11 @@
 <div class="filter-wrapper">
-  <input type="text" [(ngModel)]="text" (input)="filter($event.target.value)">
-  <fa-icon class="filter-text-remove-icon" [icon]="faIcons.faTimesCircle" (click)="filter()"></fa-icon>
 
-  <div class="tags-wrapper">
-    <app-tags type="filter" (emitTags)="setTags($event)"></app-tags>
-  </div>
-
-  <div class="priority-wrapper">
-    <fa-icon
-      class="todo-priority priority-full"
-      [ngClass]="{'priority-active': priority.full}"
-      (click)="changePriority('full')"
-      [icon]="faIcons.faBatteryFull">
-    </fa-icon>
-    <fa-icon
-      class="todo-priority priority-half"
-      [ngClass]="{'priority-active': priority.half}"
-      (click)="changePriority('half')"
-      [icon]="faIcons.faBatteryHalf">
-    </fa-icon>
-    <fa-icon
-      class="todo-priority priority-empty"
-      [ngClass]="{'priority-active': priority.empty}"
-      (click)="changePriority('empty')"
-      [icon]="faIcons.faBatteryEmpty">
-    </fa-icon>
-
-
-    <fa-icon
-      class="todo-priority todo-removed"
-      [ngClass]="{'priority-active': showRemoved}"
-      (click)="changeRemoved()"
-      [icon]="faIcons.faTrash">
-    </fa-icon>
-  </div>
+  <mat-form-field class="filter-string-form" appearance="fill">
+    <mat-label>Строка поиска</mat-label>
+    <input matInput placeholder="Введите строку для поиска" type="text" [(ngModel)]="value" (input)="changeString($event.target.value)">
+    <button *ngIf="value" class="filter-string-remove-button" matSuffix mat-icon-button aria-label="Clear" (click)="clearString()">
+<!--      <mat-icon>close</mat-icon>-->
+      <fa-icon class="filter-text-remove-icon" [icon]="faTimesCircle"></fa-icon>
+    </button>
+  </mat-form-field>
 </div>

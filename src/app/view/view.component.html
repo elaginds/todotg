@@ -1,14 +1,27 @@
-<div class="todo-container" *ngIf="todoList && todoList.length">
+<div class="todo-container">
+
+  <app-header [user]="user" (emitTodoList)="setTodoList($event)"></app-header>
 
   <!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
-  <div class="sort-filter-wrapper">
-    <div class="sort-wrapper" *ngIf="sortedTodoList && sortedTodoList.length">
-      <app-sort [todoList]="sortedTodoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>
+  <!--<div class="sort-filter-wrapper">
+
+    <div class="sort-filter-wrapper-first-string">
+      <div class="sort-wrapper" *ngIf="filteredTodoList">
+        <app-sort [todoList]="filteredTodoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>
+      </div>
+
+      <div class="filter-wrapper">
+        <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>
+      </div>
     </div>
-    <div class="filter-wrapper">
-      <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>
+
+    <div class="sort-filter-wrapper-second-string">
+      <div class="tags-wrapper">
+        <app-tags type="filter"></app-tags>
+      </div>
     </div>
-  </div>
+
+  </div>-->
 
   <!-- ДОБАВЛЕНИЕ ЗАДАЧИ -->
   <app-edit [todo]="newToDo" (emitTodo)="addToDo($event)"></app-edit>

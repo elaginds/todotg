@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ApiService} from '../../../services/api.service';
+import {ApiService} from '../../services/api.service';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
-import {Tags} from '../../../models/Tags';
+import {Tags} from '../../models/Tags';
 
 @Component({
   selector: 'app-tags',
@@ -15,6 +15,7 @@ export class TagsComponent implements OnInit {
   showInput = false;
   tagsCtrl = new FormControl();
   tags: Tags[] = [];
+  // tslint:disable-next-line:variable-name
   _todoTags: Tags[] = [];
 
   @Input() set type(type: string) {
@@ -55,7 +56,6 @@ export class TagsComponent implements OnInit {
   private getTags(): void {
     this.api.getTags().subscribe(tags => {
       this.tags = tags;
-      console.log('GETTAGS', this._todoTags);
       this.tagsCtrl.setValue(this._todoTags);
     }, error => {
       console.warn(error);

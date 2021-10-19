@@ -1,3 +1,4 @@
+<!--
 <select class="sort-select" (change)="onSelectChange($event.target)">
   <option *ngFor="let sort of selectSort"
           value="{{sort.value}}"
@@ -5,3 +6,11 @@
     {{sort.name}}
   </option>
 </select>
+-->
+
+<mat-form-field appearance="fill" class="sort-container">
+  <mat-label>Выберите сортировку</mat-label>
+  <mat-select [formControl]="sortCtrl" [(value)]="defaultSort" class="sort-select">
+    <mat-option *ngFor="let sort of selectSort" [value]="sort.value">{{sort.name}}</mat-option>
+  </mat-select>
+</mat-form-field>

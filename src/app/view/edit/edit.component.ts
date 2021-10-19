@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {faBatteryEmpty, faBatteryFull, faBatteryHalf, faPlusSquare, faChevronCircleDown, faChevronCircleUp} from '@fortawesome/free-solid-svg-icons';
 import {ToDo} from '../../models/ToDo';
-import {Tags} from '../../models/Tags';
 
 @Component({
   selector: 'app-edit',
@@ -32,7 +31,7 @@ export class EditComponent {
     }
   }
 
-  public setTags(tags: Tags[]): void {
+  public setTags(tags: number[]): void {
     this.newToDo.tags = tags;
   }
 

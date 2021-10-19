@@ -1,0 +1,26 @@
+<!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
+<div class="sort-filter-wrapper">
+
+  <div class="sort-filter-wrapper-first-string">
+    <div class="sort-wrapper">
+<!--      <app-sort [todoList]="filteredTodoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>-->
+      <app-sort (emitSort)="onChangeSort($event)"></app-sort>
+    </div>
+
+    <div class="filter-wrapper">
+<!--      <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>-->
+      <app-filter (emitFilterString)="onChangeFilterString($event)"></app-filter>
+    </div>
+  </div>
+
+  <div class="sort-filter-wrapper-second-string">
+    <div class="tags-wrapper">
+      <app-tags type="filter" (emitTags)="onChangeTags($event)"></app-tags>
+    </div>
+
+    <div class="priority-wrapper">
+      <app-priority (emitPriority)="onChangePriority($event)" (emitRemoved)="onChangeRemoved($event)"></app-priority>
+    </div>
+  </div>
+
+</div>

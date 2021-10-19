@@ -1,0 +1,23 @@
+@import "src/app/shared/variables.scss";
+
+.tags-wrapper {
+
+  .tags-container {
+
+    .tags-select {
+      height: $input-height;
+    }
+  }
+
+  .tag-add-container {
+    padding: 0;
+
+    .tag-add-input {
+
+    }
+
+    .tag-add-button {
+
+     }
+  }
+}

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ToDo} from '../../models/ToDo';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-sort',
@@ -37,40 +38,18 @@ export class SortComponent {
       isAsc: false
     },
   ];
-  private todos: ToDo[];
+  sortCtrl = new FormControl();
 
-  @Input() set todoList(todoList: ToDo[]) {
-    this.todos = todoList;
-    this.onSelectChange();
-  }
+  @Output() emitSort = new EventEmitter();
 
-  @Output() emitSortedTodos = new EventEmitter();
-
-  public onSelectChange(target?): void {
-    let type = 0;
-
-    if (target && target.value !== undefined) {
-      type = target.value;
-    }
-
-    if (this.todos && this.todos.sort) {
-      this.emitSortedTodos.emit(this.sort(type));
-    }
-  }
-
-  private sort(type: number): ToDo[] {
-    const name = this.sortTypes[type].name;
-    const isAsc = this.sortTypes[type].isAsc;
-
-    return this.todos.sort((a: ToDo, b: ToDo) => {
-      if (a[name] > b[name]) {
-        return isAsc ? 1 : -1;
-      } else if (a[name] < b[name]) {
-        return isAsc ? -1 : 1;
-      } else {
-        return 0;
-      }
+  constructor() {
+    this.sortCtrl.valueChanges.subscribe((type: number) => {
+      this.emitSort.emit(this.sortTypes[type]);
     });
-  }
 
+    setTimeout(() => {
+      this.sortCtrl.setValue(this.defaultSort);
+    }, 13);
+
+  }
 }

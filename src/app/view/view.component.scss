@@ -1,15 +1,6 @@
+@import "src/app/shared/variables";
+
 .todo-container {
-  .sort-filter-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    .sort-wrapper {
-
-    }
-
-    .filter-wrapper {
-
-    }
-  }
 
   .todo-wrapper {
     display: flex;
@@ -47,6 +38,7 @@
 
     .todo-text-span {
       margin-left: 10px;
+      //color: $opposite-main-color;
 
       &.priority-full {
         font-weight: bold;
@@ -62,6 +54,8 @@
         text-decoration: line-through;
         opacity: 0.7;
       }
+
+
     }
 
     .todo-icon {

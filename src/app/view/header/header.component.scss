@@ -1,0 +1,30 @@
+.sort-filter-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+
+  .sort-filter-wrapper-first-string{
+    display: flex;
+    flex-flow: row nowrap;
+
+    .sort-wrapper {
+      margin: 10px 0 0 10px;
+    }
+
+    .filter-wrapper {
+      margin: 10px 0 0 10px;
+    }
+  }
+
+  .sort-filter-wrapper-second-string {
+    display: flex;
+    flex-flow: row nowrap;
+
+    .tags-wrapper {
+      margin: 0 0 0 10px;
+    }
+
+    .priority-wrapper {
+      margin: 0 0 0 10px;
+    }
+  }
+}

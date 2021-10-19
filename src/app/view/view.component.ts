@@ -22,6 +22,7 @@ export class ViewComponent {
   };
   public todoList: ToDo[] = null;
   public sortedTodoList: ToDo[];
+  public filteredTodoList: ToDo[];
   public newToDo = new ToDo();
   public selectPriority = [
     {
@@ -34,27 +35,25 @@ export class ViewComponent {
     value: 3,
     name: 'Не важно'
   }];
+  public currentUser = null;
 
-  @Input() set user(user: User | null) {
-    if (user && user.userid) {
+  @Input() user;
+
+  /*@Input() set user(user: User | null) {
+    console.log(user);
+    this.currentUser = user;
+    /!*if (user && user.userid) {
       setTimeout(() => {
         this.getTodos(user.userid);
-      }, 1000);
-    }
-  }
+      }, 13);
+    }*!/
+  }*/
 
   constructor(private api: ApiService) {
   }
 
-  public setSortedTodos(todos: ToDo[]): void {
-    this.sortedTodoList = todos;
-  }
-
-  public setFilteredTodos(todos: ToDo[]): void {
-    setTimeout(() => {
-      this.sortedTodoList = todos;
-    }, 13);
-
+  public setTodoList(todoList: ToDo[]): void {
+    this.sortedTodoList = todoList;
   }
 
   public addToDo(newToDo): void {
@@ -96,21 +95,6 @@ export class ViewComponent {
       console.warn(err);
       this.newToDo = new ToDo();
     });
-  }
-
-  private getTodos(userid): void {
-    this.api.getTodos(userid).subscribe(data => {
-        this.todoList = data.map(item => {
-          return new ToDo(item);
-        });
-
-        /*this.sortedTodoList = data.map(item => {
-          return new ToDo(item);
-        });*/
-      },
-      error => {
-        console.warn(error);
-      });
   }
 
 }

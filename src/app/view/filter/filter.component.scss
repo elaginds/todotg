@@ -1,48 +1,13 @@
 .filter-wrapper {
-  height: 30px;
-  width: 140px;
-  margin: 10px;
-  display: flex;
-  flex-flow: row nowrap;
+  .filter-string-form{
+    width: 395px;
 
-  .filter-text-remove-icon {
-    margin-left: 5px;
-    font-size: 26px;
-    line-height: 30px;
-    color: darkslateblue;
-  }
+    .filter-string-remove-button {
+      border: none;
+      top: -7px;
 
-  .priority-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    margin-left: 10px;
-
-    .todo-priority {
-      padding: 0 5px;
-      font-size: 30px;
-      line-height: 30px;
-
-      &.todo-removed {
-        margin-left: 20px;
-        font-size: 25px;
-
-        &.priority-active {
-          color: royalblue;
-        }
-      }
-
-      &.priority-active {
-        &.priority-full {
-          color: darkred;
-        }
-
-        &.priority-half {
-          color: darkblue;
-        }
-
-        &.priority-empty {
-          color: darkgreen;
-        }
+      .filter-text-remove-icon {
+        font-size: 27px;
       }
     }
   }

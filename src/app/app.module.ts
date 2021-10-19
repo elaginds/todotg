@@ -13,10 +13,15 @@ import { EditComponent } from './view/edit/edit.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
-import {MatFormField, MatFormFieldModule, MatLabel} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {TagsComponent} from './view/edit/tags/tags.component';
+import {TagsComponent} from './view/tags/tags.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import { HeaderComponent } from './view/header/header.component';
+import { PriorityComponent } from './view/priority/priority.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,22 +30,29 @@ import {MatSelectModule} from '@angular/material/select';
     SortComponent,
     FilterComponent,
     EditComponent,
-    TagsComponent
+    TagsComponent,
+    HeaderComponent,
+    PriorityComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    FormsModule,
-    MatChipsModule,
-    MatIconModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule,
-    MatAutocompleteModule,
-    MatSelectModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+
+        MatChipsModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatInputModule,
+        MatButtonToggleModule,
+
+        FontAwesomeModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

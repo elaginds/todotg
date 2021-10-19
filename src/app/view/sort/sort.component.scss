@@ -1,5 +1,9 @@
-.sort-select {
-  height: 30px;
-  width: 140px;
-  margin: 10px;
+@import "src/app/shared/variables.scss";
+
+.sort-container {
+  //margin: $input-margin;
+
+  .sort-select {
+    height: $input-height;
+  }
 }
