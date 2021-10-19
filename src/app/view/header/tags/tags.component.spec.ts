@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from '../../app-routing.module';
+import {AppRoutingModule} from '../../../app-routing.module';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';

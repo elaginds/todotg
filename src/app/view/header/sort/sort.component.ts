@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ToDo} from '../../models/ToDo';
+import {ToDo} from '../../../models/ToDo';
 import {FormControl} from '@angular/forms';
 
 @Component({

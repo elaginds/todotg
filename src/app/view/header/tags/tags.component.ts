@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
-import {Tags} from '../../models/Tags';
+import {Tags} from '../../../models/Tags';
 
 @Component({
   selector: 'app-tags',

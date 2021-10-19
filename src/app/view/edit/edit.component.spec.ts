@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditComponent } from './edit.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {TagsComponent} from '../tags/tags.component';
+import {TagsComponent} from '../header/tags/tags.component';
 import {FormsModule} from '@angular/forms';
 
 describe('EditComponent', () => {
