@@ -9,7 +9,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SortComponent } from './view/header/sort/sort.component';
 import { FilterComponent } from './view/header/filter/filter.component';
-import { EditComponent } from './view/edit/edit.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -22,6 +21,8 @@ import { HeaderComponent } from './view/header/header.component';
 import { PriorityComponent } from './view/header/priority/priority.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import { ModalComponent } from './view/modal/modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,30 +30,31 @@ import {MatButtonModule} from '@angular/material/button';
     ViewComponent,
     SortComponent,
     FilterComponent,
-    EditComponent,
     TagsComponent,
     HeaderComponent,
-    PriorityComponent
+    PriorityComponent,
+    ModalComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
 
-        MatChipsModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatAutocompleteModule,
-        MatSelectModule,
-        MatInputModule,
-        MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatDialogModule,
 
-        FontAwesomeModule,
-        MatButtonModule
-    ],
+    FontAwesomeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

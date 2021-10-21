@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ApiService} from '../../../services/api.service';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
@@ -16,15 +16,13 @@ export class TagsComponent implements OnInit {
   tagsCtrl = new FormControl();
   tags: Tags[] = [];
   // tslint:disable-next-line:variable-name
-  _todoTags: Tags[] = [];
+  _todoTags: number[] = [];
 
   @Input() set type(type: string) {
     this.showInput = type === 'edit';
   }
 
-  @Input() set todoTags(tags: Tags[]) {
-    console.log(tags);
-
+  @Input() set todoTags(tags: number[]) {
     this._todoTags = tags;
   }
 
@@ -47,10 +45,27 @@ export class TagsComponent implements OnInit {
 
     this.api.addTag(this.inputText).subscribe(data => {
       this.tags = data;
+
+      const newTagId = this.getTagIdByValue(this.inputText);
+
+      if (newTagId) {
+        this.tagsCtrl.value.push(this.getTagIdByValue(this.inputText));
+      }
+
+      this.inputText = '';
+    });
+  }
+
+  private getTagIdByValue(value: string): number {
+    let result = null;
+
+    this.tags.forEach((item: Tags) => {
+      if (item.value === value) {
+        result = item.id;
+      }
     });
 
-
-    this.inputText = '';
+    return result;
   }
 
   private getTags(): void {

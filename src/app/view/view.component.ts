@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {faBatteryEmpty, faBatteryFull, faBatteryHalf, faEdit, faStar, faStarHalf, faTrash, faTrashRestore} from '@fortawesome/free-solid-svg-icons';
 import {ApiService} from '../services/api.service';
-import {User} from '../models/User';
 import {ToDo} from '../models/ToDo';
+import {ModalComponent} from './modal/modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view',
@@ -37,19 +38,15 @@ export class ViewComponent {
   }];
   public currentUser = null;
 
+
   @Input() user;
 
-  /*@Input() set user(user: User | null) {
-    console.log(user);
-    this.currentUser = user;
-    /!*if (user && user.userid) {
-      setTimeout(() => {
-        this.getTodos(user.userid);
-      }, 13);
-    }*!/
-  }*/
+  constructor(private api: ApiService,
+              public dialog: MatDialog) {
 
-  constructor(private api: ApiService) {
+    /*setTimeout(() => {
+      this.openDialog(null);
+    }, 100);*/
   }
 
   public setTodoList(todoList: ToDo[]): void {
@@ -58,12 +55,12 @@ export class ViewComponent {
 
   public addToDo(newToDo): void {
     const todo = new ToDo(newToDo);
-    delete todo.isEdit;
 
     this.api.postToDo(todo).subscribe(data => {
-      this.todoList = data.map(item => {
+      this.todoList = data;
+      /*this.todoList = data.map(item => {
         return new ToDo(item);
-      });
+      });*/
 
       this.newToDo = new ToDo();
     }, err => {
@@ -84,16 +81,43 @@ export class ViewComponent {
 
   public edit(todo): void {
     todo.editDate = new Date();
-    delete todo.isEdit;
+
     this.api.editToDo(todo).subscribe(data => {
-      this.todoList = data.map(item => {
+      this.todoList = data;
+      /*this.todoList = data.map(item => {
         return new ToDo(item);
-      });
+      });*/
 
       this.newToDo = new ToDo();
     }, err => {
       console.warn(err);
       this.newToDo = new ToDo();
+    });
+  }
+
+  public openDialog(todo: ToDo | null): void {
+    const isNew = Boolean(!todo);
+
+    if (!todo) {
+      todo = new ToDo();
+    }
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: todo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+
+      if (!result) {
+        return;
+      }
+
+      if (isNew) {
+        this.addToDo(result);
+      } else {
+        this.edit(result);
+      }
     });
   }
 

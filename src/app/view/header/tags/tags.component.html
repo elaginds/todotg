@@ -7,13 +7,12 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="tag-add-container" *ngIf="showInput">
-    <input type="text" class="tag-add-input" [(ngModel)]="inputText">
-    <fa-icon
-      class="tag-add-button"
-      (click)="addTag()"
-      [icon]="faCheckSquare">
-    </fa-icon>
-  </div>
+  <mat-form-field class="filter-string" appearance="fill" *ngIf="showInput">
+    <mat-label>Добавление тега</mat-label>
+    <input matInput placeholder="Введите тег" type="text" [(ngModel)]="inputText">
+    <button matSuffix mat-icon-button  class="filter-button" (click)="addTag()" *ngIf="inputText">Ок</button>
+  </mat-form-field>
+
+<!--  <button mat-raised-button class="filter-button" (click)="addTag()" *ngIf="showInput">Ок</button>-->
 
 </div>

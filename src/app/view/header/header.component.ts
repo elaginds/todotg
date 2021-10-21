@@ -35,6 +35,18 @@ export class HeaderComponent {
     }
   }
 
+  @Input() set todoList(todoList: ToDo[] | null) {
+    if (!todoList || !todoList.map) {
+      return;
+    }
+
+    this.originalTodoList = todoList.map(item => {
+      return new ToDo(item);
+    });
+
+    this.runFilter();
+  }
+
   @Output() emitTodoList = new EventEmitter();
 
   constructor(private api: ApiService,

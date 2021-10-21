@@ -2,6 +2,10 @@
 
 .todo-container {
 
+  .todo-add-button {
+    margin: 0 0 10px 10px;
+  }
+
   .todo-wrapper {
     display: flex;
     flex-flow: row nowrap;

@@ -12,7 +12,6 @@ export class ToDo {
   createDate: Date | null;
   editDate: Date | null;
   removeDate: Date | null;
-  isEdit = false;
 
   constructor(todo?: any) {
     if (!todo) {

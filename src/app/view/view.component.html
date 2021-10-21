@@ -1,41 +1,22 @@
 <div class="todo-container">
 
-  <app-header [user]="user" (emitTodoList)="setTodoList($event)"></app-header>
+  <app-header [user]="user" [todoList]="todoList" (emitTodoList)="setTodoList($event)"></app-header>
 
-  <!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
-  <!--<div class="sort-filter-wrapper">
-
-    <div class="sort-filter-wrapper-first-string">
-      <div class="sort-wrapper" *ngIf="filteredTodoList">
-        <app-sort [todoList]="filteredTodoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>
-      </div>
-
-      <div class="filter-wrapper">
-        <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>
-      </div>
-    </div>
-
-    <div class="sort-filter-wrapper-second-string">
-      <div class="tags-wrapper">
-        <app-tags type="filter"></app-tags>
-      </div>
-    </div>
-
-  </div>-->
+  <button mat-flat-button color="accent" class="todo-add-button" (click)="openDialog(null)">Новая задача</button>
 
   <!-- ДОБАВЛЕНИЕ ЗАДАЧИ -->
-  <app-edit [todo]="newToDo" (emitTodo)="addToDo($event)"></app-edit>
+<!--  <app-edit [todo]="newToDo" (emitTodo)="addToDo($event)"></app-edit>-->
 
   <!-- ОСНОВНОЙ СПИСОК -->
   <div class="todo-wrapper" *ngFor="let todo of sortedTodoList; let i = index">
     <div class="todo-index">{{i + 1}}</div>
 
-    <fa-icon class="todo-priority priority-full" [icon]="faIcons.faBatteryFull" *ngIf="todo.priority === 1 && !todo.isEdit"></fa-icon>
-    <fa-icon class="todo-priority priority-half" [icon]="faIcons.faBatteryHalf" *ngIf="todo.priority === 2 && !todo.isEdit"></fa-icon>
-    <fa-icon class="todo-priority priority-empty" [icon]="faIcons.faBatteryEmpty" *ngIf="todo.priority === 3 && !todo.isEdit"></fa-icon>
+    <fa-icon class="todo-priority priority-full" [icon]="faIcons.faBatteryFull" *ngIf="todo.priority === 1"></fa-icon>
+    <fa-icon class="todo-priority priority-half" [icon]="faIcons.faBatteryHalf" *ngIf="todo.priority === 2"></fa-icon>
+    <fa-icon class="todo-priority priority-empty" [icon]="faIcons.faBatteryEmpty" *ngIf="todo.priority === 3"></fa-icon>
 
 <!--    <button class="todo-button todo-button-edit" (click)="todo.isEdit = true">-->
-      <fa-icon class="todo-icon todo-icon-edit" [icon]="faIcons.faEdit" (click)="todo.isEdit = true"></fa-icon>
+      <fa-icon class="todo-icon todo-icon-edit" [icon]="faIcons.faEdit" (click)="openDialog(todo)"></fa-icon>
 <!--    </button>-->
 <!--    <button class="todo-button todo-button-remove" (click)="remove(todo)">-->
       <fa-icon class="todo-icon todo-icon-restore" [icon]="faIcons.faTrashRestore" *ngIf="todo.removeDate" (click)="remove(todo)"></fa-icon>
@@ -46,10 +27,10 @@
           'priority-half': todo.priority === 2,
           'priority-empty': todo.priority === 3,
           'removed': todo.removeDate}"
-          *ngIf="!todo.isEdit">{{todo.text}}</span>
+    >{{todo.text}}</span>
 
     <!-- ДОБАВЛЕНИЕ ЗАДАЧИ -->
-    <app-edit *ngIf="todo.isEdit" [todo]="todo" (emitTodo)="edit($event)"></app-edit>
+<!--    <app-edit *ngIf="todo.isEdit" [todo]="todo" (emitTodo)="edit($event)"></app-edit>-->
 
   </div>
 

@@ -1,0 +1,59 @@
+<div class="modal-wrapper">
+
+  <form class="modal-form-container" [formGroup]="form">
+
+    <div class="modal-form-dates">
+
+      <mat-form-field class="modal-date-create" appearance="fill">
+        <mat-label>Дата создания</mat-label>
+        <input matInput type="text" readonly [value]="form.get('createDate').value | date:'dd.MM.yyyy'">
+      </mat-form-field>
+
+      <mat-form-field class="modal-date-edit" appearance="fill" *ngIf="form.get('editDate').value">
+        <mat-label>Дата изменения</mat-label>
+        <input matInput type="text" readonly [value]="form.get('editDate').value | date:'dd.MM.yyyy'">
+      </mat-form-field>
+
+      <mat-form-field class="modal-date-remove" appearance="fill" *ngIf="form.get('removeDate').value">
+        <mat-label>Дата удаления</mat-label>
+        <input matInput type="text" readonly [value]="form.get('removeDate').value | date:'dd.MM.yyyy'">
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field appearance="fill" class="sort-container">
+      <mat-label>Выберите приоритет</mat-label>
+      <mat-select formControlName="priority" class="sort-select">
+        <mat-option *ngFor="let opt of priorityOptions" [value]="opt.value">{{opt.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="modal-string" appearance="fill">
+      <mat-label>Название задачи</mat-label>
+      <input matInput placeholder="Введите название" type="text" formControlName="text">
+    </mat-form-field>
+
+    <mat-form-field class="modal-note" appearance="fill">
+      <textarea matInput
+              placeholder="Введите описание"
+              formControlName="note"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="5">
+
+      </textarea>
+    </mat-form-field>
+
+    <div class="filter-tag-wrapper">
+      <app-tags [todoTags]="data.tags" (emitTags)="onEmitTags($event)" type="edit"></app-tags>
+    </div>
+
+  </form>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Сохранить</button>
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Закрыть</button>
+</div>
