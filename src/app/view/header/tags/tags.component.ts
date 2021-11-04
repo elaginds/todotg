@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ApiService} from '../../../services/api.service';
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import {Tags} from '../../../models/Tags';
 
 @Component({
@@ -10,7 +9,6 @@ import {Tags} from '../../../models/Tags';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
-  faCheckSquare = faCheckSquare;
   inputText = '';
   showInput = false;
   tagsCtrl = new FormControl();
@@ -27,6 +25,7 @@ export class TagsComponent implements OnInit {
   }
 
   @Output() emitTags = new EventEmitter();
+  @Output() emitTagsLabel = new EventEmitter();
 
   ngOnInit(): void {
     this.getTags();
@@ -35,6 +34,18 @@ export class TagsComponent implements OnInit {
   constructor(private api: ApiService) {
     this.tagsCtrl.valueChanges.subscribe(tags => {
       this.emitTags.emit(tags);
+
+      const result = [];
+
+      if (tags && tags.indexOf) {
+        this.tags.forEach(item => {
+          if (tags.indexOf(item.id) !== -1) {
+            result.push(item.value);
+          }
+        });
+
+        this.emitTagsLabel.emit(result);
+      }
     });
   }
 

@@ -10,24 +10,20 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  public getUser(): Observable<any> {
-    return this.http.get('/export/user', {params: {user: 'eds'}});
-  }
-
   public getTags(): Observable<any> {
-    return this.http.get('/export/tags', {params: {user: 'eds'}});
+    return this.http.get('/api/tags');
   }
 
   public addTag(text): Observable<any> {
-    return this.http.post('/export/tag/add', {text});
+    return this.http.post('/api/tag/add', {text});
   }
 
-  public getTodos(userid): Observable<any> {
-    return this.http.get('/export/todo', {params: {userid}});
+  public getTodos(): Observable<any> {
+    return this.http.get('/api/todo');
   }
 
   public postToDo(todo): Observable<any> {
-    return this.http.post('/export/todo', {todo});
+    return this.http.post('/api/todo', {todo});
   }
 
   public removeToDo(id): Observable<any> {
@@ -38,10 +34,10 @@ export class ApiService {
       body: { id }
     };
 
-    return this.http.delete('/export/todo', options);
+    return this.http.delete('/api/todo', options);
   }
 
   public editToDo(todo): Observable<any> {
-    return this.http.put('/export/todo', {todo});
+    return this.http.put('/api/todo', {todo});
   }
 }

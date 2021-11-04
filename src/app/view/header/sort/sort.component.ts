@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ToDo} from '../../../models/ToDo';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {SortOptions} from '../../../models/SortOptions';
 
 @Component({
   selector: 'app-sort',
@@ -23,18 +23,22 @@ export class SortComponent {
     value: 3,
     name: 'По алфавиту ↑'
   }];
-  private sortTypes = [
+  private sortTypes: SortOptions[] = [
     {
       name: 'priority',
+      label: 'Важность ↓',
       isAsc: true
     }, {
       name: 'priority',
+      label: 'Важность ↑',
       isAsc: false
     }, {
       name: 'text',
+      label: 'По алфавиту ↓',
       isAsc: true
     }, {
       name: 'text',
+      label: 'По алфавиту ↑',
       isAsc: false
     },
   ];

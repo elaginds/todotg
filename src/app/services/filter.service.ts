@@ -15,9 +15,9 @@ export class FilterService {
     }
 
     /* ПРОВЕРКА, ПОКАЗЫВАТЬ ЛИ УДАЛЕННЫЕ ЗАПИСИ */
-    if (!options.showRemoved && todo.removeDate) {
+    /*if (!options.showRemoved && todo.removeDate) {
       return false;
-    }
+    }*/
 
     /* ПРОВЕРКА, ПОДХОДЯТ ЛИ ТЭГИ */
     if (options.tags && options.tags.length) {
@@ -34,7 +34,7 @@ export class FilterService {
     }
 
     /* ПРОВЕРКА, ПОДХОДИТ ЛИ СТРОКА ПОИСКА */
-    if (options.str && options.str.toLowerCase && todo.text && todo.text.toLowerCase) {
+    if (result && options.str && options.str.toLowerCase && todo.text && todo.text.toLowerCase) {
       result = todo.text.toLowerCase().indexOf(options.str.toLowerCase()) !== -1;
     }
 

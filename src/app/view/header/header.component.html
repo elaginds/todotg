@@ -1,26 +1,61 @@
 <!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
 <div class="sort-filter-wrapper">
 
-  <div class="sort-filter-wrapper-first-string">
-    <div class="sort-wrapper">
-<!--      <app-sort [todoList]="filteredTodoList" (emitSortedTodos)="setSortedTodos($event)"></app-sort>-->
-      <app-sort (emitSort)="onChangeSort($event)"></app-sort>
-    </div>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel>
 
-    <div class="filter-wrapper">
-<!--      <app-filter [todoList]="todoList" (emitFilteredTodos)="setFilteredTodos($event)"></app-filter>-->
-      <app-filter (emitFilterString)="onChangeFilterString($event)"></app-filter>
-    </div>
-  </div>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Сортировка и фильтрация
+        </mat-panel-title>
+        <mat-panel-description class="expansion-panel-description">
 
-  <div class="sort-filter-wrapper-second-string">
-    <div class="tags-wrapper">
-      <app-tags type="filter" (emitTags)="onChangeTags($event)"></app-tags>
-    </div>
+          <div>
+          <span class="expansion-panel-description-name">Сортировка: </span>
+          <span class="expansion-panel-description-value">{{sortOptions.label}}</span>
+          </div>
 
-    <div class="priority-wrapper">
-      <app-priority (emitPriority)="onChangePriority($event)" (emitRemoved)="onChangeRemoved($event)"></app-priority>
-    </div>
-  </div>
+          <div>
+            <span class="expansion-panel-description-name" *ngIf="filterOptions.str">Строка:</span>
+            <span class="expansion-panel-description-value" *ngIf="filterOptions.str">{{filterOptions.str}}</span>
+            <span class="expansion-panel-description-divider" *ngIf="filterOptions.str">|</span>
+            <fa-icon class="expansion-panel-description-priority priority-full" [icon]="is.faIconPriorityFull" *ngIf="filterOptions.priority.indexOf(1) !== -1"></fa-icon>
+            <fa-icon class="expansion-panel-description-priority priority-half" [icon]="is.faIconPriorityHalf" *ngIf="filterOptions.priority.indexOf(2) !== -1"></fa-icon>
+            <fa-icon class="expansion-panel-description-priority priority-empty" [icon]="is.faIconPriorityEmpty" *ngIf="filterOptions.priority.indexOf(3) !== -1"></fa-icon>
+            <fa-icon class="expansion-panel-description-priority priority-removed" [icon]="is.faIconTrash" *ngIf="filterOptions.showRemoved"></fa-icon>
+            <span class="expansion-panel-description-divider" *ngIf="filterOptions.tags && filterOptions.tags.length">|</span>
+            <span class="expansion-panel-description-name" *ngIf="filterOptions.tags && filterOptions.tags.length">Теги:</span>
+            <span class="expansion-panel-description-value" *ngIf="filterOptions.tags && filterOptions.tags.length">{{filterOptions.tags.length}}</span>
+          </div>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="sort-filter-wrapper-first-string">
+        <div class="sort-wrapper">
+          <app-sort (emitSort)="onChangeSort($event)"></app-sort>
+        </div>
+
+        <div class="filter-wrapper">
+          <app-filter (emitFilterString)="onChangeFilterString($event)"></app-filter>
+        </div>
+      </div>
+
+      <div class="sort-filter-wrapper-second-string">
+        <div class="tags-wrapper">
+          <app-tags type="filter" (emitTags)="onChangeTags($event)" (emitTagsLabel)="onEmitTagsLabel($event)"></app-tags>
+        </div>
+
+        <div class="priority-wrapper">
+          <app-priority (emitPriority)="onChangePriority($event)"
+                        (emitPriorityLabel)="onChangePriorityLabel($event)"
+                        (emitRemoved)="onChangeRemoved($event)"></app-priority>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
 
 </div>

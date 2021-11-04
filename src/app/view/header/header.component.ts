@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {User} from '../../models/User';
 import {ToDo} from '../../models/ToDo';
 import {ApiService} from '../../services/api.service';
 import {FilterService} from '../../services/filter.service';
 import {SortService} from '../../services/sort.service';
 import {FilterOptions} from '../../models/FilterOptions';
 import {SortOptions} from '../../models/SortOptions';
+import {IconsShared} from '../../shared/icons.shared';
 
 @Component({
   selector: 'app-header',
@@ -13,27 +13,23 @@ import {SortOptions} from '../../models/SortOptions';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  public is = new IconsShared();
   private originalTodoList: ToDo[] | null = null;
   private filteredTodoList: ToDo[] | null = null;
   private sortedTodoList: ToDo[] | null = null;
-  private filterOptions: FilterOptions = {
+  public filterOptions: FilterOptions = {
     str: '',
     tags: null,
     priority: [],
-    showRemoved: false
+    showRemoved: false,
+    tagsLabel: '',
+    priorityLabel: ''
   };
-  private sortOptions: SortOptions = {
+  public sortOptions: SortOptions = {
     name: 'priority',
+    label: 'Важность ↓',
     isAsc: true
   };
-
-  @Input() set user(user: User | null) {
-    if (user && user.userid) {
-      setTimeout(() => {
-        this.getTodos(user.userid);
-      }, 13);
-    }
-  }
 
   @Input() set todoList(todoList: ToDo[] | null) {
     if (!todoList || !todoList.map) {
@@ -51,7 +47,11 @@ export class HeaderComponent {
 
   constructor(private api: ApiService,
               private filterService: FilterService,
-              private sortService: SortService) { }
+              private sortService: SortService) {
+    setTimeout(() => {
+      this.getTodos();
+    }, 13);
+  }
 
   public onChangeSort($event): void {
     this.sortOptions = $event;
@@ -69,9 +69,17 @@ export class HeaderComponent {
     this.runFilter();
   }
 
+  public onEmitTagsLabel($event): void {
+    this.filterOptions.tagsLabel = $event;
+  }
+
   public onChangePriority($event): void {
     this.filterOptions.priority = $event;
     this.runFilter();
+  }
+
+  public onChangePriorityLabel($event): void {
+    this.filterOptions.priorityLabel = $event;
   }
 
   public onChangeRemoved($event): void {
@@ -91,8 +99,8 @@ export class HeaderComponent {
     this.emitTodoList.emit(this.sortedTodoList);
   }
 
-  private getTodos(userid): void {
-    this.api.getTodos(userid).subscribe(data => {
+  private getTodos(): void {
+    this.api.getTodos().subscribe(data => {
         this.originalTodoList = data.map(item => {
           return new ToDo(item);
         });

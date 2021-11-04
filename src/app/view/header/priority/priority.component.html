@@ -1,37 +1,9 @@
 <div class="priority-wrapper">
 
   <mat-button-toggle-group class="priority-group-wrapper" name="ingredients" aria-label="Ingredients" multiple>
-    <mat-button-toggle class="priority-button" value="full" checked="true" (change)="changePriority($event.value)">Важные</mat-button-toggle>
-    <mat-button-toggle class="priority-button" value="half" checked="true" (change)="changePriority($event.value)">Средние</mat-button-toggle>
-    <mat-button-toggle class="priority-button" value="empty" checked="true" (change)="changePriority($event.value)">Не важные</mat-button-toggle>
+    <mat-button-toggle class="priority-button" value="full" [checked]="priority.full" (change)="changePriority($event.value)">Важные</mat-button-toggle>
+    <mat-button-toggle class="priority-button" value="half" [checked]="priority.half" (change)="changePriority($event.value)">Средние</mat-button-toggle>
+    <mat-button-toggle class="priority-button" value="empty" [checked]="priority.empty" (change)="changePriority($event.value)">Не важные</mat-button-toggle>
     <mat-button-toggle class="priority-button" value="removed" (change)="changeRemoved()">Удаленные</mat-button-toggle>
   </mat-button-toggle-group>
-<!--
-
-  <fa-icon
-    class="todo-priority priority-full"
-    [ngClass]="{'priority-active': priority.full}"
-    (click)="changePriority('full')"
-    [icon]="faIcons.faBatteryFull">
-  </fa-icon>
-  <fa-icon
-    class="todo-priority priority-half"
-    [ngClass]="{'priority-active': priority.half}"
-    (click)="changePriority('half')"
-    [icon]="faIcons.faBatteryHalf">
-  </fa-icon>
-  <fa-icon
-    class="todo-priority priority-empty"
-    [ngClass]="{'priority-active': priority.empty}"
-    (click)="changePriority('empty')"
-    [icon]="faIcons.faBatteryEmpty">
-  </fa-icon>
-
-
-  <fa-icon
-    class="todo-priority todo-removed"
-    [ngClass]="{'priority-active': showRemoved}"
-    (click)="changeRemoved()"
-    [icon]="faIcons.faTrash">
-  </fa-icon>-->
 </div>

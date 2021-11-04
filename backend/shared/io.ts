@@ -1,8 +1,8 @@
-const fs = require('fs');
+const fsio = require('fs');
 
 exports.readFile = (filename) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(`./${filename}-base.json`, 'utf8',  (err, data) => {
+    fsio.readFile(`./base/${filename}-base.json`, 'utf8',  (err, data) => {
       if (!data) {
         resolve('');
       }
@@ -20,7 +20,7 @@ exports.readFile = (filename) => {
 
 exports.writeFile = (filename, todos) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(`./${filename}-base.json`, JSON.stringify(todos),  (err) => {
+    fsio.writeFile(`./base/${filename}-base.json`, JSON.stringify(todos),  (err) => {
       if (!err) {
         resolve(err);
       } else {

@@ -5,7 +5,7 @@
     <input matInput placeholder="Введите строку для поиска" type="text" [(ngModel)]="value" (input)="changeString($event.target.value)">
     <button *ngIf="value" class="filter-string-remove-button" matSuffix mat-icon-button aria-label="Clear" (click)="clearString()">
 <!--      <mat-icon>close</mat-icon>-->
-      <fa-icon class="filter-text-remove-icon" [icon]="faTimesCircle"></fa-icon>
+      <fa-icon class="filter-text-remove-icon" [icon]="is.faIconInputCancel"></fa-icon>
     </button>
   </mat-form-field>
 </div>

@@ -1,9 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {faBatteryEmpty, faBatteryFull, faBatteryHalf, faEdit, faStar, faStarHalf, faTrash, faTrashRestore} from '@fortawesome/free-solid-svg-icons';
+import {Component} from '@angular/core';
 import {ApiService} from '../services/api.service';
 import {ToDo} from '../models/ToDo';
 import {ModalComponent} from './modal/modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {IconsShared} from '../shared/icons.shared';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackBarComponent} from './snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-view',
@@ -11,19 +13,19 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
-  public faIcons = {
-    faBatteryFull,
-    faBatteryHalf,
-    faBatteryEmpty,
-    faEdit,
-    faStar,
-    faStarHalf,
-    faTrash,
-    faTrashRestore
-  };
+  public is = new IconsShared();
   public todoList: ToDo[] = null;
   public sortedTodoList: ToDo[];
   public filteredTodoList: ToDo[];
+  public dividedTodoList: {
+    original: ToDo[],
+    done: ToDo[],
+    removed: ToDo[]
+  } = {
+    original: [],
+    done: [],
+    removed: []
+  };
   public newToDo = new ToDo();
   public selectPriority = [
     {
@@ -38,19 +40,49 @@ export class ViewComponent {
   }];
   public currentUser = null;
 
-
-  @Input() user;
-
-  constructor(private api: ApiService,
-              public dialog: MatDialog) {
-
-    /*setTimeout(() => {
-      this.openDialog(null);
-    }, 100);*/
+  public get originalLabel(): string {
+    return `Текущие (${this.dividedTodoList.original.length})`;
   }
 
+  public get doneLabel(): string {
+    return `Завершенные (${this.dividedTodoList.done.length})`;
+  }
+
+  public get removedLabel(): string {
+    return `Удаленные (${this.dividedTodoList.removed.length})`;
+  }
+
+
+  constructor(private api: ApiService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) {}
+
   public setTodoList(todoList: ToDo[]): void {
-    this.sortedTodoList = todoList;
+    // this.sortedTodoList = todoList;
+
+    this.dividedTodoList = this.divideTodoList(todoList);
+  }
+
+  private divideTodoList(todoList: ToDo[]): any {
+    const result = {
+      original: [],
+      done: [],
+      removed: []
+    };
+
+    if (todoList && todoList.forEach) {
+      todoList.forEach((item: ToDo) => {
+        if (item.removeDate) {
+          result.removed.push(item);
+        } else if (item.doneDate) {
+          result.done.push(item);
+        } else {
+          result.original.push(item);
+        }
+      });
+    }
+
+    return result;
   }
 
   public addToDo(newToDo): void {
@@ -58,37 +90,23 @@ export class ViewComponent {
 
     this.api.postToDo(todo).subscribe(data => {
       this.todoList = data;
-      /*this.todoList = data.map(item => {
-        return new ToDo(item);
-      });*/
 
       this.newToDo = new ToDo();
+
+      this.openSnackBar(todo.text, 'add');
     }, err => {
       console.warn(err);
       this.newToDo = new ToDo();
     });
   }
 
-  public remove(todo): void {
-    if (!todo.removeDate) {
-      todo.removeDate = new Date();
-    } else {
-      todo.removeDate = null;
-    }
-
-    this.edit(todo);
-  }
-
-  public edit(todo): void {
-    todo.editDate = new Date();
-
+  public editToDo({todo, type}): void {
     this.api.editToDo(todo).subscribe(data => {
       this.todoList = data;
-      /*this.todoList = data.map(item => {
-        return new ToDo(item);
-      });*/
 
       this.newToDo = new ToDo();
+
+      this.openSnackBar(todo.text, type);
     }, err => {
       console.warn(err);
       this.newToDo = new ToDo();
@@ -107,7 +125,7 @@ export class ViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      console.log('The dialog was closed', isNew, result);
 
       if (!result) {
         return;
@@ -116,9 +134,29 @@ export class ViewComponent {
       if (isNew) {
         this.addToDo(result);
       } else {
-        this.edit(result);
+        todo.editDate = new Date();
+
+        this.editToDo({
+          todo: result,
+          type: 'edit'
+        });
       }
     });
   }
 
+  public openSnackBar(text: string, type: string): void {
+    this.snackBar.openFromComponent(SnackBarComponent,  {
+      duration: 100000,
+      panelClass: `snack-bar-${type}`,
+      data: {
+        text,
+        type
+      }
+    });
+
+    /*this.snackBar.open(message);
+    setTimeout(() => {
+      this.snackBar.dismiss();
+    }, 1500);*/
+  }
 }

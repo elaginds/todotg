@@ -1,0 +1,28 @@
+<div class="todo-list-wrapper" *ngIf="todoList && todoList.length">
+  <div class="todo-wrapper" *ngFor="let todo of todoList; let i = index">
+    <div class="todo-index">{{i + 1}}</div>
+
+    <fa-icon class="todo-priority priority-full" [icon]="is.faIconPriorityFull" *ngIf="todo.priority === 1"></fa-icon>
+    <fa-icon class="todo-priority priority-half" [icon]="is.faIconPriorityHalf" *ngIf="todo.priority === 2"></fa-icon>
+    <fa-icon class="todo-priority priority-empty" [icon]="is.faIconPriorityEmpty" *ngIf="todo.priority === 3"></fa-icon>
+
+    <fa-icon class="todo-icon todo-icon-done" [icon]="is.faIconDone" (click)="done(todo)"></fa-icon>
+
+    <fa-icon class="todo-icon todo-icon-edit" [icon]="is.faIconEdit" (click)="edit(todo)"></fa-icon>
+
+    <fa-icon class="todo-icon todo-icon-restore" [icon]="is.faIconTrashRestore" *ngIf="todo.removeDate" (click)="remove(todo)"></fa-icon>
+    <fa-icon class="todo-icon todo-icon-remove" [icon]="is.faIconTrash" *ngIf="!todo.removeDate" (click)="remove(todo)"></fa-icon>
+
+    <span class="todo-text-span"
+          [ngClass]="{'priority-full': todo.priority === 1,
+            'priority-half': todo.priority === 2,
+            'priority-empty': todo.priority === 3,
+            'removed': todo.removeDate}"
+    >{{todo.text}}</span>
+
+  </div>
+</div>
+
+<div class="todo-list-empty" *ngIf="!todoList || !todoList.length">
+  Здесь ничего нет.
+</div>

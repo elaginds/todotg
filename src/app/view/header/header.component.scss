@@ -2,6 +2,30 @@
   display: flex;
   flex-flow: column nowrap;
 
+  .expansion-panel-description {
+    display: flex;
+    flex-flow: column nowrap;
+
+    .expansion-panel-description-name {
+      font-weight: bold;
+    }
+    .expansion-panel-description-value {
+      padding-left: 3px;
+    }
+    .expansion-panel-description-divider {
+      font-weight: bold;
+      padding: 0 5px;
+    }
+
+    .expansion-panel-description-priority {
+      &.priority-half,
+      &.priority-empty,
+      &.priority-removed {
+        padding-left: 3px;
+      }
+    }
+  }
+
   .sort-filter-wrapper-first-string{
     display: flex;
     flex-flow: row nowrap;

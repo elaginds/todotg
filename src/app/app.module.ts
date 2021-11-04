@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SortComponent } from './view/header/sort/sort.component';
 import { FilterComponent } from './view/header/filter/filter.component';
@@ -23,6 +23,14 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from './view/modal/modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ListComponent } from './view/list/list.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SnackBarComponent } from './view/snack-bar/snack-bar.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +41,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     TagsComponent,
     HeaderComponent,
     PriorityComponent,
-    ModalComponent
+    ModalComponent,
+    ListComponent,
+    SnackBarComponent,
+    AuthComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +64,17 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonToggleModule,
     MatButtonModule,
     MatDialogModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatSnackBarModule,
 
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

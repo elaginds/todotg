@@ -12,6 +12,7 @@ export class ToDo {
   createDate: Date | null;
   editDate: Date | null;
   removeDate: Date | null;
+  doneDate: Date | null;
 
   constructor(todo?: any) {
     if (!todo) {
@@ -29,5 +30,6 @@ export class ToDo {
     this.createDate = todo.createDate || new Date();
     this.editDate = todo.editDate || null;
     this.removeDate = todo.removeDate || null;
+    this.doneDate = todo.doneDate || null;
   }
 }

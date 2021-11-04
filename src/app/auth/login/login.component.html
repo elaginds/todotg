@@ -1,0 +1,25 @@
+<div class="login-wrapper">
+  <form [formGroup]="form" class="form-container">
+    <fieldset>
+      <legend class="form-legend">Войти</legend>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Логин</mat-label>
+        <input matInput placeholder="Введите логин" value="Sushi" formControlName="login">
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input matInput placeholder="Введите пароль" value="Sushi" formControlName="password">
+      </mat-form-field>
+
+    </fieldset>
+
+    <div class="form-error" *ngIf="showError">Неправильный логин или пароль</div>
+
+    <div class="form-buttons">
+      <button class="button button-primary"
+              (click)="login()">Login</button>
+    </div>
+  </form>
+</div>

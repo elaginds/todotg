@@ -39,3 +39,13 @@ module.exports.match = (originalArray, value, name) => {
 
   return result;
 };
+
+module.exports.filterByUserId = (data, userId) => {
+  if (data && data.filter && userId) {
+    return data.filter(item => {
+      return item.userId === userId;
+    });
+  } else {
+    return [];
+  }
+};

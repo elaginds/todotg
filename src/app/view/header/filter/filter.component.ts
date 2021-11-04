@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import {IconsShared} from '../../../shared/icons.shared';
 
 @Component({
   selector: 'app-filter',
@@ -7,7 +7,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  public faTimesCircle = faTimesCircle;
+  public is = new IconsShared();
   public value = '';
 
   @Output() emitFilterString = new EventEmitter();

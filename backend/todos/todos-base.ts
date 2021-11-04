@@ -1,10 +1,12 @@
-const io = require('./io.ts');
-const common = require('./common.ts');
+const io = require('../shared/io.ts');
+const common = require('../shared/common.ts');
 
-module.exports.getData = () => {
+module.exports.getTodos = (userId) => {
   return new Promise((resolve, reject) => {
     io.readFile('todos').then(data => {
-        resolve(data);
+        // resolve(data);
+        // resolve(filterTodosByUserId(data, userId));
+        resolve(common.filterByUserId(data, userId));
       },
       err => {
         reject(err);
@@ -12,9 +14,10 @@ module.exports.getData = () => {
   });
 };
 
-module.exports.createTodo = (todo) => {
+module.exports.createTodo = (todo, userId) => {
   return new Promise((resolve, reject) => {
     io.readFile('todos').then(data => {
+        todo.userId = userId;
         todo.id = common.createId();
 
         if (data) {
@@ -40,7 +43,7 @@ module.exports.createTodo = (todo) => {
   });
 };
 
-module.exports.removeTodo = (id) => {
+/*module.exports.removeTodo = (id) => {
   console.log('REMOVE');
   return new Promise((resolve, reject) => {
     io.readFile('todos').then(data => {
@@ -58,7 +61,7 @@ module.exports.removeTodo = (id) => {
       });
     });
   });
-};
+};*/
 
 module.exports.editTodo = (todo) => {
   return new Promise((resolve, reject) => {
@@ -77,4 +80,14 @@ module.exports.editTodo = (todo) => {
       });
     });
   });
+};
+
+const filterTodosByUserId = (todos, userId) => {
+  if (todos && todos.filter) {
+    return todos.filter(item => {
+      return item.userId === userId;
+    });
+  } else {
+    return [];
+  }
 };

@@ -1,11 +1,13 @@
-const iot = require('./io.ts');
-const commont = require('./common.ts');
+const iot = require('../shared/io.ts');
+// import * as common from '../shared/common';
+const commont = require('../shared/common.ts');
 const filename = 'tags';
 
-module.exports.getData = () => {
+module.exports.getData = (userId) => {
   return new Promise((resolve, reject) => {
     iot.readFile(filename).then(data => {
-        resolve(data);
+        // resolve(data);
+        resolve(commont.filterByUserId(data, userId));
       },
       err => {
         reject(err);
@@ -13,7 +15,7 @@ module.exports.getData = () => {
   });
 };
 
-module.exports.createTodo = (text) => {
+module.exports.createTodo = (text, userId) => {
   return new Promise((resolve, reject) => {
     iot.readFile(filename).then(data => {
         const match = commont.match(data, text, 'value');
@@ -21,6 +23,7 @@ module.exports.createTodo = (text) => {
         if (!match) {
           const tag = {
             id: commont.createId(),
+            userId,
             value: text
           };
 
@@ -47,3 +50,15 @@ module.exports.createTodo = (text) => {
       });
   });
 };
+
+
+
+/*const filterTagsByUserId = (tags, userId) => {
+  if (tags && tags.filter) {
+    return tags.filter(item => {
+      return item.userId === userId;
+    });
+  } else {
+    return [];
+  }
+};*/
