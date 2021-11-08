@@ -6,14 +6,17 @@ module.exports.secret = 'some_secret'; // a secret key is set here
 
 module.exports.login = (req, res) => {
   getUser(req).then(user => {
+    // @ts-ignore
     const token = jwt.sign({login: user.login, id: user.id}, this.secret, { expiresIn: '5m'});
 
     globalToken = token;
 
+    // @ts-ignore
     res.status(200).json({
       token
     });
   }, err => {
+    // @ts-ignore
     res.status(403).json({
       message: err
     });
@@ -24,6 +27,7 @@ module.exports.getUserId = (req, res) => {
   const authorization = req.headers.authorization.substring(7);
 
   if (!authorization) {
+    // @ts-ignore
     res.status(403).json('No authorization');
     return null;
   }
@@ -34,13 +38,37 @@ module.exports.getUserId = (req, res) => {
     if (decoded && decoded.id) {
       return decoded.id;
     } else {
+      // @ts-ignore
       res.status(403).json('Invalid user');
       return null;
     }
   } catch (e) {
+    // @ts-ignore
     res.status(403).json('Invalid authorization');
     return null;
   }
+};
+
+module.exports.getUserIdByTgId = (id) => {
+  return new Promise((resolve, reject) => {
+    ioa.readFile('users').then(users => {
+      let userId = null;
+
+      users.forEach(item => {
+        if (item.telegramId === id) {
+          userId = item.id;
+        }
+      });
+
+      if (userId) {
+        resolve(userId);
+      } else {
+        reject(null);
+      }
+    }, err => {
+      reject(err);
+    });
+  });
 };
 
 const getUser = (req) => {

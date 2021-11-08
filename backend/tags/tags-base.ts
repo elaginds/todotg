@@ -15,7 +15,7 @@ module.exports.getData = (userId) => {
   });
 };
 
-module.exports.createTodo = (text, userId) => {
+module.exports.createTag = (text, userId) => {
   return new Promise((resolve, reject) => {
     iot.readFile(filename).then(data => {
         const match = commont.match(data, text, 'value');
@@ -36,7 +36,7 @@ module.exports.createTodo = (text, userId) => {
 
         iot.writeFile(filename, data).then(() => {
           iot.readFile(filename).then(tags => {
-              resolve(tags);
+              resolve(commont.filterByUserId(tags, userId));
             },
             err => {
               reject(err);

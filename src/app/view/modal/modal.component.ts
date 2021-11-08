@@ -13,13 +13,13 @@ export class ModalComponent {
   public priorityOptions = [
     {
     value: 1,
-    name: 'Важно'
+    name: 'Высокая'
   }, {
     value: 2,
-    name: 'Средне'
+    name: 'Средняя'
   }, {
     value: 3,
-    name: 'Не важно'
+    name: 'Низкая'
   }];
 
   constructor(

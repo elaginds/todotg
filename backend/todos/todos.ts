@@ -1,7 +1,7 @@
 const todosBase = require('./todos-base.ts');
 
 module.exports.getAllTodos = (req, res, userId) => {
-  todosBase.getTodos(userId).then(data => {
+  todosBase.getTodos({userId}).then(data => {
     res.status(200).json(data);
   }, err => {
     res.status(403).json(err);
@@ -17,11 +17,24 @@ module.exports.createTodo = (req, res, userId) => {
 };
 
 module.exports.editTodo = (req, res, userId) => {
-  console.log('EDIT', req.body.todo);
-  todosBase.editTodo(req.body.todo).then(data => {
+  todosBase.editTodo(req.body.todo, userId).then(data => {
     res.status(200).json(data);
   }, err => {
     res.status(403).json(err);
+  });
+};
+
+module.exports.getTodosTG = (filterOptions) => {
+  return new Promise((resolve, reject) => {
+    todosBase.getTodos(filterOptions).then(data => {
+      if (data && data.length) {
+        resolve(data);
+      } else {
+        reject(null);
+      }
+    }, err => {
+      reject(err);
+    });
   });
 };
 

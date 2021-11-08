@@ -15,6 +15,7 @@
     "express-jwt": "^6.1.0",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "node-telegram-bot-api": "^0.54.0",
     "request": "^2.88.2"
   }
 }

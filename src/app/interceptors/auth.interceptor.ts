@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core'; // imports the class that provides local storage for token
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Interception In Progress'); // Interception Stage
@@ -22,6 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           // Catching Error Stage
           if (error && error.status === 401) {
+            this.router.navigate(['login']).then(() => {
+              console.log('navigate to login');
+            });
             console.log('ERROR 401 UNAUTHORIZED'); // in case of an error response the error message is displayed
           }
           const err = error.error.message || error.statusText;

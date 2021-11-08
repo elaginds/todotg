@@ -60,7 +60,14 @@ export class TagsComponent implements OnInit {
       const newTagId = this.getTagIdByValue(this.inputText);
 
       if (newTagId) {
-        this.tagsCtrl.value.push(this.getTagIdByValue(this.inputText));
+        let value = this.tagsCtrl.value;
+
+        if (value && value.push) {
+          value.push(newTagId);
+        } else {
+          value = [newTagId];
+        }
+        this.tagsCtrl.setValue(value);
       }
 
       this.inputText = '';

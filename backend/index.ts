@@ -8,6 +8,7 @@ const port = 3000;
 const todos = require('./todos/todos.ts');
 const tags = require('./tags/tags.ts');
 const auth = require('./auth/auth.ts');
+const tg = require('./telegram/telegram.ts');
 
 
 app.options('*', cors());
@@ -49,6 +50,14 @@ app.route('/api/todo').post((req, res) => {
   }
 });
 
+app.route('/api/todo').put((req, res) => {
+  const userId = auth.getUserId(req, res);
+
+  if (userId) {
+    todos.editTodo(req, res, userId);
+  }
+});
+
 /*app.route('/api/todo').put((req, res) => {
   const userId = auth.getUserId(req, res);
 
@@ -59,7 +68,7 @@ app.route('/api/todo').post((req, res) => {
 
 // app.route('/api/todo').post(todos.createTodo);
 
-app.route('/api/todo').put(todos.editTodo);
+// app.route('/api/todo').put(todos.editTodo);
 
 
 /* TAGS */
@@ -90,6 +99,8 @@ app.route('/api/tag/add').post((req, res) => {
 /* LISTEN */
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+
+  tg.createTelegramBot();
 });
 
 /*

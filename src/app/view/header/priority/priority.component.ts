@@ -72,15 +72,15 @@ export class PriorityComponent implements OnInit {
     const result = [];
 
     if (this.priority.full) {
-      result.push('Важные');
+      result.push('Высокая');
     }
 
     if (this.priority.half) {
-      result.push('Средние');
+      result.push('Средняя');
     }
 
     if (this.priority.empty) {
-      result.push('Не важные');
+      result.push('Низкая');
     }
 
     return result && result.length ? result.join(', ') : '';

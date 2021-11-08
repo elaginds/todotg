@@ -1,12 +1,14 @@
 const io = require('../shared/io.ts');
 const common = require('../shared/common.ts');
 
-module.exports.getTodos = (userId) => {
+module.exports.getTodos = (filterOptions) => {
   return new Promise((resolve, reject) => {
     io.readFile('todos').then(data => {
         // resolve(data);
         // resolve(filterTodosByUserId(data, userId));
-        resolve(common.filterByUserId(data, userId));
+        // data = common.filterByUserId(data, userId);
+
+        resolve(common.filter(data, filterOptions));
       },
       err => {
         reject(err);
@@ -28,7 +30,7 @@ module.exports.createTodo = (todo, userId) => {
 
         io.writeFile('todos', data).then(() => {
           io.readFile('todos').then(todos => {
-              resolve(todos);
+              resolve(common.filter(data, {userId}));
             },
             err => {
               reject(err);
@@ -63,14 +65,15 @@ module.exports.createTodo = (todo, userId) => {
   });
 };*/
 
-module.exports.editTodo = (todo) => {
+module.exports.editTodo = (todo, userId) => {
   return new Promise((resolve, reject) => {
+    todo.userId = userId;
     io.readFile('todos').then(data => {
       data = common.changeInArray(data, todo);
 
       io.writeFile('todos', data).then(() => {
         io.readFile('todos').then(todos => {
-            resolve(todos);
+            resolve(common.filter(todos, {userId}));
           },
           err => {
             reject(err);
@@ -80,14 +83,4 @@ module.exports.editTodo = (todo) => {
       });
     });
   });
-};
-
-const filterTodosByUserId = (todos, userId) => {
-  if (todos && todos.filter) {
-    return todos.filter(item => {
-      return item.userId === userId;
-    });
-  } else {
-    return [];
-  }
 };

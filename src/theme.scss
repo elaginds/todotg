@@ -26,8 +26,12 @@ $app-theme: mat-light-theme($app-primary, $app-accent);
     .mat-form-field-outline-gap,
     .mat-form-field-outline-end,
     .mat-form-field-flex {
-      background-color: mat-color($primary, default-contrast);;
+      //background-color: mat-color($primary, default-contrast);;
       //background-color: #69F0AE;
+      font-family: Roboto,Helvetica,Arial,sans-serif;
+      color: #E1F9F9;
+      font-size: 16px;
+      font-weight: 300;
     }
   }
 }

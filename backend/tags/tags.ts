@@ -9,10 +9,26 @@ module.exports.getTags = (req, res, userId) => {
 };
 
 module.exports.addTag = (req, res, userId) => {
-  tagsBase.createTodo(req.body.text, userId).then(data => {
+  tagsBase.createTag(req.body.text, userId).then(data => {
     res.status(200).json(data);
   }, err => {
     res.status(403).json(err);
+  });
+};
+
+module.exports.getTagsTG = (userId) => {
+  return new Promise((resolve, reject) => {
+    tagsBase.getData(userId).then(data => {
+      if (data && data.length) {
+        resolve(data.map(item => {
+          return item.value;
+        }));
+      } else {
+        reject(null);
+      }
+    }, err => {
+      reject(err);
+    });
   });
 };
 

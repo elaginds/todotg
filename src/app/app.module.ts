@@ -31,6 +31,7 @@ import { SnackBarComponent } from './view/snack-bar/snack-bar.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
     MatExpansionModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatCardModule,
 
     FontAwesomeModule
   ],
