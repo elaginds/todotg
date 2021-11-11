@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ToDo} from '../models/ToDo';
 import {SortOptions} from '../models/SortOptions';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,10 @@ export class SortService {
     let A: string | number;
     let B: string | number;
 
-    if (typeof a[name] === 'string' && typeof b[name] === 'string') {
+    if (name === 'date') {
+      A = moment(a.createDate).format('YYYYMMDD');
+      B = moment(b.createDate).format('YYYYMMDD');
+    } else if (typeof a[name] === 'string' && typeof b[name] === 'string') {
       // @ts-ignore
       A = a[name].toLowerCase();
       // @ts-ignore

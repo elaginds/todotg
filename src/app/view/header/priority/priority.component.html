@@ -1,9 +1,0 @@
-<div class="priority-wrapper">
-
-  <mat-button-toggle-group class="priority-group-wrapper" name="ingredients" aria-label="Ingredients" multiple>
-    <mat-button-toggle class="priority-button" value="full" [checked]="priority.full" (change)="changePriority($event.value)">Высокая</mat-button-toggle>
-    <mat-button-toggle class="priority-button" value="half" [checked]="priority.half" (change)="changePriority($event.value)">Средняя</mat-button-toggle>
-    <mat-button-toggle class="priority-button" value="empty" [checked]="priority.empty" (change)="changePriority($event.value)">Низкая</mat-button-toggle>
-    <mat-button-toggle class="priority-button" value="removed" (change)="changeRemoved()">Удаленные</mat-button-toggle>
-  </mat-button-toggle-group>
-</div>

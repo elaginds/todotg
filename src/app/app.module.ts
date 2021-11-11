@@ -7,18 +7,18 @@ import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SortComponent } from './view/header/sort/sort.component';
-import { FilterComponent } from './view/header/filter/filter.component';
+import { SortComponent } from './view/menu/sort/sort.component';
+import { FilterComponent } from './view/menu/filter/filter.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {TagsComponent} from './view/header/tags/tags.component';
+import {TagsComponent} from './view/menu/tags/tags.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
-import { HeaderComponent } from './view/header/header.component';
-import { PriorityComponent } from './view/header/priority/priority.component';
+import { MenuComponent } from './view/menu/menu.component';
+import { PriorityComponent } from './view/menu/priority/priority.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from './view/modal/modal.component';
@@ -32,6 +32,9 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import {MatCardModule} from '@angular/material/card';
     SortComponent,
     FilterComponent,
     TagsComponent,
-    HeaderComponent,
+    MenuComponent,
     PriorityComponent,
     ModalComponent,
     ListComponent,
@@ -69,6 +72,9 @@ import {MatCardModule} from '@angular/material/card';
     MatTabsModule,
     MatSnackBarModule,
     MatCardModule,
+    MatDividerModule,
+    MatSlideToggleModule,
+    MatBadgeModule,
 
     FontAwesomeModule
   ],

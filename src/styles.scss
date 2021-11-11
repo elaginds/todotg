@@ -19,6 +19,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   //background-color: #303030 !important;
+  background-image: url("./assets/images/Dark_background.png");
 }
 
 .mat-snack-bar-container {
@@ -28,4 +29,15 @@ body {
   &.snack-bar-undone {
     background-color: darkslateblue;
   }
+}
+
+.mat-tab-label {
+  background-color: #202020;
+  color: #FFFFFF;
+}
+
+.mat-tab-label-active {
+  font-size: 16px !important;
+  background-color: #050505;
+  color: #FFFFFF;
 }

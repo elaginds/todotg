@@ -40,19 +40,6 @@ export class ViewComponent {
   }];
   public currentUser = null;
 
-  public get originalLabel(): string {
-    return `Текущие (${this.dividedTodoList.original.length})`;
-  }
-
-  public get doneLabel(): string {
-    return `Завершенные (${this.dividedTodoList.done.length})`;
-  }
-
-  public get removedLabel(): string {
-    return `Удаленные (${this.dividedTodoList.removed.length})`;
-  }
-
-
   constructor(private api: ApiService,
               private snackBar: MatSnackBar,
               public dialog: MatDialog) {}
@@ -146,7 +133,7 @@ export class ViewComponent {
 
   public openSnackBar(text: string, type: string): void {
     this.snackBar.openFromComponent(SnackBarComponent,  {
-      duration: 100000,
+      duration: 2000,
       panelClass: `snack-bar-${type}`,
       data: {
         text,

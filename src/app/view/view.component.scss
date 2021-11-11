@@ -1,9 +1,24 @@
 @import "src/app/shared/variables";
 
 .todo-container {
+  //background-color: #202020;
+  //background-image: url("../../assets/images/Dark_background.png");
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+
+  .tab-container {
+    width: 100%;
+  }
 
   .todo-add-button {
+    background-color: #00BCD4;
     margin: 10px 0 10px 10px;
   }
 
+}
+
+.modal-dialog {
+  background-color: #444444;
 }

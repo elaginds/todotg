@@ -38,7 +38,7 @@
 
         <mat-form-field class="form-field" appearance="fill">
           <mat-label>Пароль</mat-label>
-          <input matInput placeholder="Введите пароль" value="Sushi" formControlName="password">
+          <input matInput type="password" placeholder="Введите пароль" value="Sushi" formControlName="password">
         </mat-form-field>
 
       </fieldset>
@@ -46,8 +46,8 @@
       <div class="form-error" *ngIf="showError">Неправильный логин или пароль</div>
 
       <div class="form-buttons">
-        <button mat-raised-button class="button button-primary"
-                (click)="login()">Login</button>
+        <button mat-flat-button class="button button-primary"
+                (click)="login()">Войти</button>
       </div>
     </form>
   </mat-card-actions>

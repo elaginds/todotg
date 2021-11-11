@@ -9,45 +9,45 @@ import {SortOptions} from '../../../models/SortOptions';
 })
 export class SortComponent {
   public defaultSort = 0;
-  public selectSort = [
+  public sortTypes: SortOptions[] = [
     {
-    value: 0,
-    name: 'Важность ↓'
-  }, {
-    value: 1,
-    name: 'Важность ↑'
-  }, {
-    value: 2,
-    name: 'По алфавиту ↓'
-  }, {
-    value: 3,
-    name: 'По алфавиту ↑'
-  }];
-  private sortTypes: SortOptions[] = [
-    {
+      value: 0,
       name: 'priority',
       label: 'Важность ↓',
       isAsc: true
     }, {
+      value: 1,
       name: 'priority',
       label: 'Важность ↑',
       isAsc: false
     }, {
+      value: 2,
       name: 'text',
       label: 'По алфавиту ↓',
       isAsc: true
     }, {
+      value: 3,
       name: 'text',
       label: 'По алфавиту ↑',
       isAsc: false
-    },
+    }, {
+      value: 4,
+      name: 'date',
+      label: 'По дате создания ↓',
+      isAsc: true
+    }, {
+      value: 5,
+      name: 'date',
+      label: 'По дате создания ↑',
+      isAsc: false
+    }
   ];
   sortCtrl = new FormControl();
 
   @Output() emitSort = new EventEmitter();
 
   constructor() {
-    this.sortCtrl.valueChanges.subscribe((type: number) => {
+    this.sortCtrl.valueChanges.subscribe((type: any) => {
       this.emitSort.emit(this.sortTypes[type]);
     });
 

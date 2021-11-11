@@ -21,13 +21,63 @@ $app-theme: mat-light-theme($app-primary, $app-accent);
     color: mat-color($accent, default-contrast);
   }*/
 
+  .mat-select-value {
+    color: #FFFFFF;
+  }
+
+  .mat-flat-button {
+    background-color: #00BCD4;
+  }
+
+  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #0089A1;
+  }
+
+  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #00BCD4;
+  }
+
+  .mat-tab-label {
+    opacity: 1;
+  }
+
+  .mat-form-field-label {
+    color: #FFFFFF;
+    opacity: .7;
+  }
+
+  .mat-form-field-empty {
+    color: #FFFFFF;
+    opacity: .7;
+  }
+
+  .mat-select-panel {
+    background-color: #444444;
+  }
+
+  .mat-option,
+  .mat-option-multiple,
+  .mat-pseudo-checkbox,
+  .mat-option.mat-active,
+  .mat-form-field-label {
+    color: #FFFFFF;
+    opacity: .7;
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #FFFFFF;
+    opacity: .9;
+  }
+
+  mat-dialog-container {
+    background-color: #444444 !important;
+  }
+
   .mat-form-field-wrapper {
     .mat-form-field-outline-start,
     .mat-form-field-outline-gap,
     .mat-form-field-outline-end,
     .mat-form-field-flex {
-      //background-color: mat-color($primary, default-contrast);;
-      //background-color: #69F0AE;
       font-family: Roboto,Helvetica,Arial,sans-serif;
       color: #E1F9F9;
       font-size: 16px;

@@ -1,30 +1,49 @@
 .todo-list-wrapper,
 .todo-list-empty {
   margin: 10px;
+  color: #FFFFFF;
 }
+
+.todo-list-empty {
+  margin: 20px;
+  font-size: 16px;
+}
+
 .todo-wrapper {
   display: flex;
   flex-flow: row nowrap;
   text-align: right;
+  background-color: #444444;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+
+  &:hover {
+    background-color: #707070;
+  }
 
   .todo-index {
-    width: 25px;
-    padding-right: 5px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: 1px solid white;
+    border-radius: 9px;
+    text-align: center;
   }
 
   .todo-priority {
-    padding-right: 5px;
+    padding: 0 5px 0 10px;
 
     &.priority-full {
-      color: darkred;
+      color: white;
     }
 
     &.priority-half {
-      color: darkblue;
+      color: white;
     }
 
     &.priority-empty {
-      color: darkgreen;
+      color: white;
     }
   }
 
@@ -37,7 +56,10 @@
   }
 
   .todo-text-span {
+    width: 100%;
+    text-align: left;
     margin-left: 10px;
+    cursor: pointer;
     //color: $opposite-main-color;
 
     &.priority-full {
@@ -59,22 +81,26 @@
   }
 
   .todo-icon {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     padding: 0;
+    font-size: 20px;
+    cursor: pointer;
 
     &.todo-icon-edit {
-      color: darkolivegreen;
+      color: #00BCD4;
     }
     &.todo-icon-remove {
-      color: darkred;
+      color: #00BCD4;
+      margin-right: 10px;
     }
     &.todo-icon-restore {
-      color: mediumslateblue;
+      color: #00BCD4;
+      margin-right: 10px;
     }
     &.todo-icon-done {
       margin-right: 5px;
-      color: forestgreen;
+      color: #00BCD4;
     }
   }
 }

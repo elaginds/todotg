@@ -8,11 +8,11 @@ import {SortOptions} from '../../models/SortOptions';
 import {IconsShared} from '../../shared/icons.shared';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
-export class HeaderComponent {
+export class MenuComponent {
   public is = new IconsShared();
   private originalTodoList: ToDo[] | null = null;
   private filteredTodoList: ToDo[] | null = null;
@@ -26,6 +26,7 @@ export class HeaderComponent {
     priorityLabel: ''
   };
   public sortOptions: SortOptions = {
+    value: 0,
     name: 'priority',
     label: 'Важность ↓',
     isAsc: true
@@ -44,6 +45,7 @@ export class HeaderComponent {
   }
 
   @Output() emitTodoList = new EventEmitter();
+  @Output() emitNewTodo = new EventEmitter();
 
   constructor(private api: ApiService,
               private filterService: FilterService,
@@ -78,13 +80,10 @@ export class HeaderComponent {
     this.runFilter();
   }
 
-  public onChangePriorityLabel($event): void {
-    this.filterOptions.priorityLabel = $event;
-  }
-
-  public onChangeRemoved($event): void {
-    this.filterOptions.showRemoved = $event;
-    this.runFilter();
+  public newTodo(): void {
+    this.emitNewTodo.emit({
+      newTodo: true
+    });
   }
 
   private runFilter(): void {

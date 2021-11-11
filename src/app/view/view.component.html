@@ -1,19 +1,32 @@
 <div class="todo-container">
 
-  <app-header [todoList]="todoList" (emitTodoList)="setTodoList($event)"></app-header>
+<!--  <button mat-flat-button color="accent" class="todo-add-button" (click)="openDialog(null)">Новая задача</button>-->
 
-  <button mat-flat-button color="accent" class="todo-add-button" (click)="openDialog(null)">Новая задача</button>
+  <mat-tab-group class="tab-container">
 
-  <mat-tab-group>
-    <mat-tab [label]="originalLabel">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span [matBadge]="dividedTodoList.original.length" matBadgeOverlap="false">Текущие</span>
+      </ng-template>
       <app-list [todoList]="dividedTodoList.original" (emitToDo)="editToDo($event)" (emitToDoEdit)="openDialog($event)"></app-list>
     </mat-tab>
-    <mat-tab [label]="doneLabel">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span [matBadge]="dividedTodoList.done.length" matBadgeOverlap="false">Завершенные</span>
+      </ng-template>
       <app-list [todoList]="dividedTodoList.done" (emitToDo)="editToDo($event)" (emitToDoEdit)="openDialog($event)"></app-list>
     </mat-tab>
-    <mat-tab [label]="removedLabel">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span [matBadge]="dividedTodoList.removed.length" matBadgeOverlap="false">Удаленные</span>
+      </ng-template>
       <app-list [todoList]="dividedTodoList.removed" (emitToDo)="editToDo($event)" (emitToDoEdit)="openDialog($event)"></app-list>
     </mat-tab>
+
   </mat-tab-group>
+
+  <app-menu [todoList]="todoList" (emitNewTodo)="openDialog(null)" (emitTodoList)="setTodoList($event)"></app-menu>
 
 </div>

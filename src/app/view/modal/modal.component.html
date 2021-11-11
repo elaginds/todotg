@@ -53,7 +53,7 @@
 
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Сохранить</button>
-  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Закрыть</button>
+<div mat-dialog-actions class="mat-buttons-container">
+  <button mat-flat-button (click)="onNoClick()" class="modal-ok-button">Сохранить</button>
+  <button mat-flat-button [mat-dialog-close]="null" cdkFocusInitial class="modal-close-button">Закрыть</button>
 </div>

@@ -1,0 +1,28 @@
+.priority-wrapper {
+  .priority-label{
+    span {
+      color: #FFFFFF;
+      font-size: 18px;
+    }
+  }
+
+  .priority-form-container {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 3px;
+
+    mat-slide-toggle {
+      margin-top: 5px;
+      color: #FFFFFF;
+    }
+  }
+  /*.priority-group-wrapper {
+    height: 53px;
+    border-radius: 4px 4px 0 0;
+    line-height: 53px;
+
+    .priority-button {
+
+    }
+  }*/
+}

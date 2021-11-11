@@ -1,5 +1,32 @@
+<div class="menu-wrapper">
+
+  <button mat-flat-button class="todo-add-button" (click)="newTodo()">Новая задача</button>
+
+  <mat-divider class="menu-divider"></mat-divider>
+
+  <div class="menu-element sort-wrapper">
+    <app-sort (emitSort)="onChangeSort($event)"></app-sort>
+  </div>
+
+  <div class="menu-element filter-wrapper">
+    <app-filter (emitFilterString)="onChangeFilterString($event)"></app-filter>
+  </div>
+
+  <div class="menu-element tags-wrapper">
+    <app-tags type="filter" (emitTags)="onChangeTags($event)" (emitTagsLabel)="onEmitTagsLabel($event)"></app-tags>
+  </div>
+
+  <mat-divider class="menu-divider"></mat-divider>
+
+  <div class="menu-element priority-wrapper">
+    <app-priority (emitPriority)="onChangePriority($event)"></app-priority>
+  </div>
+
+</div>
+
+
 <!-- СОРТИРОВКА И ФИЛЬТРАЦИЯ -->
-<div class="sort-filter-wrapper">
+<!--<div class="sort-filter-wrapper">
 
   <mat-accordion class="example-headers-align">
     <mat-expansion-panel>
@@ -58,4 +85,4 @@
 
 
 
-</div>
+</div>-->
